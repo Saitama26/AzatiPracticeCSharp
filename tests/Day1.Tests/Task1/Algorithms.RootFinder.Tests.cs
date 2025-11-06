@@ -1,4 +1,4 @@
-using Day1Solution;
+using Day1.Task1_2;
 
 namespace Day1Tests;
 
@@ -14,10 +14,10 @@ public class AlgorithmsRootFinderTests
     [InlineData(-1197, 5, 5, -4.12685)]
     [InlineData(int.MaxValue, 2, 6, 46340.950001)] 
     [InlineData(int.MinValue, 3, 3, -1290.159)]   
-    public void TestFindRoot(double num, int n, int accuracy, double expected)
+    public void TestFindRoot(double value, int degree, int accuracy, double expected)
     {
         //Act
-        double res = Algorithms.FindNthRoot(num, n, accuracy);
+        double res = Algorithms.FindNthRoot(value, degree, accuracy);
         //Assert
         Assert.Equal(expected, res);
     }
@@ -42,10 +42,10 @@ public class AlgorithmsRootFinderTests
     [InlineData(-16, 2, 2)]  
     [InlineData(-8, 4, 2)]   
     [InlineData(-1, 10, 2)]
-    public void FindNthRoot_NegativeValue_ThrowsException(double num, int root, int accuracy)
+    public void FindNthRoot_NegativeValue_ThrowsException(double value, int degree, int accuracy)
     {
         // Act
-        var act = new Func<object?>(() => Algorithms.FindNthRoot(num, root, accuracy));
+        var act = new Func<object?>(() => Algorithms.FindNthRoot(value, degree, accuracy));
 
         //Assert
         Assert.Throws<Exception>(act);

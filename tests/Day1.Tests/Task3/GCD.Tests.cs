@@ -1,4 +1,4 @@
-﻿using Day1Solution;
+﻿using Day1.Task3;
 
 namespace Day1Tests;
 

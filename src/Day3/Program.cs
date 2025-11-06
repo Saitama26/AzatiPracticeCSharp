@@ -1,7 +1,6 @@
-﻿using Day2Solution.Task2DoubleExtension;
-using Day2Solution.Task3Polynomial;
+﻿using Day3.task1_3;
 
-namespace Day2Solution
+namespace Day3Solution
 {
     internal class Program
     {

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Day1Solution;
+namespace Day1.Task3;
 
 public static class GCD
 {

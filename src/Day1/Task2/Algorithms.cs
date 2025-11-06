@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Day1Solution;
+﻿namespace Day1.Task1_2;
 
 public static partial class Algorithms
 {

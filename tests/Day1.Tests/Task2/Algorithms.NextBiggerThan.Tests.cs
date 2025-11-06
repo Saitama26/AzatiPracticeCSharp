@@ -1,4 +1,4 @@
-﻿using Day1Solution;
+﻿using Day1.Task1_2;
 namespace Day1Tests;
 
 public class FindingBiggerNumberTest
