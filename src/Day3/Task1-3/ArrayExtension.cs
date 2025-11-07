@@ -71,6 +71,7 @@
             char[] arr = s.ToCharArray();
             Array.Reverse(arr);
             string reversed = new string(arr);
+
             return s == reversed;
         }
     }

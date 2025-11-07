@@ -22,7 +22,7 @@ public class TransformerTest
     public void TransformToWordsEng_ThrowNaNException()
     {
         //Arrange
-        double number = double.NaN;
+        var number = double.NaN;
 
         //Assert & Act
         Assert.Throws<ArgumentException>(() => Transformer.TransformToWordsEng(number));
@@ -32,7 +32,7 @@ public class TransformerTest
     public void TransformToWordsEng_ThrowPosInfinityException()
     {
         //Arrange
-        double number = double.PositiveInfinity;
+        var number = double.PositiveInfinity;
 
         //Assert & Act
         Assert.Throws<ArgumentException>(() => Transformer.TransformToWordsEng(number));
@@ -42,7 +42,7 @@ public class TransformerTest
     public void TransformToWordsEng_ThrowNegInfinityException()
     {
         // Arrange
-        double number = double.NegativeInfinity;
+        var number = double.NegativeInfinity;
 
         // Act & Assert
         Assert.Throws<ArgumentException>(() => Transformer.TransformToWordsEng(number));

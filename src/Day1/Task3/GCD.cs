@@ -27,6 +27,7 @@ public static class GCD
         {
             gcd = GetGcdEuclidean(gcd, values[i]);
         }
+
         return gcd;
     }
 
@@ -46,6 +47,7 @@ public static class GCD
         sw.Stop();
 
         elapsedMs = sw.ElapsedMilliseconds;
+        
         return gcd;
     }
 
@@ -72,6 +74,7 @@ public static class GCD
         {
             gcd = GetGcdStein(gcd, values[i]);
         }
+        
         return gcd;
     }
 
@@ -91,6 +94,7 @@ public static class GCD
         sw.Stop();
 
         elapsedMs = sw.ElapsedMilliseconds;
+        
         return gcd;
     }
 
@@ -106,6 +110,7 @@ public static class GCD
             else
                 y %= x;
         }
+        
         return (int)Math.Max(x, y);
     }
 

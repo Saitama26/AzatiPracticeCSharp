@@ -1,4 +1,4 @@
-﻿namespace Day1.Task1_2;
+﻿namespace Day1.Task1;
 
 public static partial class Algorithms
 {

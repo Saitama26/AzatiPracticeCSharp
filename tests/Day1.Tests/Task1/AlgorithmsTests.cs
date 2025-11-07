@@ -1,8 +1,8 @@
-using Day1.Task1_2;
+using Day1.Task1;
 
 namespace Day1.Tests.Task1;
 
-public class AlgorithmsRootFinderTests
+public partial class AlgorithmsTests
 {
     [Theory]
     [InlineData(0, 3, 2, 0)]

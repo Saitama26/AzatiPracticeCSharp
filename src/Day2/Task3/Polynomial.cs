@@ -94,6 +94,7 @@ public class Polynomial
             if (left[i] != right[i])
                 return false;
         }
+
         return true;
     }
 
@@ -116,6 +117,7 @@ public class Polynomial
             if (this[i] != other[i])
                 return false;
         }
+        
         return true;
     }
 
@@ -125,6 +127,7 @@ public class Polynomial
         int hash = 1;
         foreach (var c in _coefficients)
             hash = hash * rnd.Next(30, 100) + c.GetHashCode();
+        
         return hash;
     }
 

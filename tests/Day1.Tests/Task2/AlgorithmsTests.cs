@@ -1,11 +1,10 @@
-﻿using Day1.Task1_2;
+﻿using Day1.Task2;
 
 namespace Day1.Tests.Task2;
 
-public class FindingBiggerNumberTest
+public partial class AlgorithmsTests
 {
     [Theory]
-    //Arrange
     [InlineData(12, 21)]       
     [InlineData(513, 531)]     
     [InlineData(2017, 2071)]   
@@ -28,11 +27,9 @@ public class FindingBiggerNumberTest
     public void NextBiggerThan_NegariveNumber_ThrowExeption()
     {
         //Arrange
-        int number = int.MinValue;
+        var number = int.MinValue;
 
         //Assert & Act
         Assert.Throws<ArgumentException>(() => Algorithms.NextBiggerThan(number));
     }
-
-
 }
