@@ -18,7 +18,11 @@ public static partial class Algorithms
     /// </exception>
     public static int? NextBiggerThan(int number)
     {
-        if (number < 0) throw new ArgumentException("Number can't be negative");
+        if (number < 0) 
+        {
+            throw new ArgumentException($"{nameof(number)} can't be negative");
+        }
+        
         char[] chars = number.ToString().ToCharArray();
 
         int i = chars.Length - 2;
@@ -33,9 +37,9 @@ public static partial class Algorithms
                     {
                         (chars[i], chars[j]) = (chars[j], chars[i]);
                         Array.Reverse(chars, i + 1, chars.Length - (i + 1));
+
                         return int.TryParse(chars, out int n) ? n : null;
                     }
-
                     j--;
                 }
             }

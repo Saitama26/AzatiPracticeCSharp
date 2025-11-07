@@ -14,7 +14,7 @@ public class FindingBiggerNumberTest
     [InlineData(4321, null)]   
     [InlineData(9, null)]      
     [InlineData(int.MaxValue, null)]
-    public void TestFindindBiggerNumbers(int number, int? expected)
+    public void NextBiggerThan_ReturnsExpected(int number, int? expected)
     {
         //Act
         var res = Algorithms.NextBiggerThan(number);
@@ -25,7 +25,7 @@ public class FindingBiggerNumberTest
     }
 
     [Fact]
-    public void FindingBiggerNumber_NegariveNumber_ThrowExeption()
+    public void NextBiggerThan_NegariveNumber_ThrowExeption()
     {
         //Arrange
         int number = int.MinValue;

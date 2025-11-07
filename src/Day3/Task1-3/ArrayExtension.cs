@@ -4,8 +4,14 @@
     {
         public static string[] SortBy(this string[] array, Func<string, string, int> func)
         {
-            if (array == null) throw new ArgumentNullException("Array can't be null");
-            if (func == null) throw new ArgumentNullException("Predicate can't be null");
+            if (array == null) 
+            {
+                throw new ArgumentNullException($"{nameof(array)} can't be null"); 
+            }
+            if (func == null)
+            {
+                throw new ArgumentNullException($"{nameof(func)} can't be null"); 
+            }
 
             string[] sort = (string[])array.Clone();
             Array.Sort(sort, (x, y) => func(x, y));
@@ -15,8 +21,14 @@
 
         public static T[] Transform<T>(this double[] array, Func<double, T> func)
         {
-            if (array == null) throw new ArgumentNullException("Array can't be null");
-            if (func == null) throw new ArgumentNullException("Predicate can't be null");
+            if (array == null)
+            {
+                throw new ArgumentNullException($"{nameof(array)} can't be null");
+            }
+            if (func == null)
+            {
+                throw new ArgumentNullException($"{nameof(func)} can't be null");
+            }
 
             List<T> list = new List<T>();
 
@@ -28,8 +40,14 @@
 
         public static int[] Filter(this int[] array, Predicate<int> predicate)
         {
-            if (array == null) throw new ArgumentNullException("Array can't be null");
-            if (predicate == null) throw new ArgumentNullException("Predicate can't be null");
+            if (array == null)
+            {
+                throw new ArgumentNullException($"{nameof(array)} can't be null");
+            }
+            if (predicate == null)
+            {
+                throw new ArgumentNullException($"{nameof(predicate)} can't be null");
+            }
 
             List<int> result = new List<int>();
 

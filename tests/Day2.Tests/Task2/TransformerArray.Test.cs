@@ -70,6 +70,4 @@ public class TransformerArrayTest
         // Act & Assert
         Assert.Throws<ArgumentException>(() => numbers.GetStringRepresentation());
     }
-
-
 }

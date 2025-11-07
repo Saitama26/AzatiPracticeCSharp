@@ -57,8 +57,15 @@ public static partial class Transformer
     /// </exception>
     public static string TransformToWordsEng(double number)
     {
-        if (double.IsNaN(number)) throw new ArgumentException("Number can't ba NaN");
-        if (double.IsInfinity(number)) throw new ArgumentException("Number can't be infinity");
+        if (double.IsNaN(number)) 
+        {
+            throw new ArgumentException($"{nameof(number)} can't ba NaN"); 
+        }
+        
+        if (double.IsInfinity(number)) 
+        { 
+            throw new ArgumentException($"{nameof(number)} can't be infinity"); 
+        }
 
         string strFormat = number.ToString();
         StringBuilder resultStr = new();
@@ -86,8 +93,15 @@ public static partial class Transformer
     /// </exception>
     public static string TransformToWordsRus(double number)
     {
-        if (double.IsNaN(number)) throw new ArgumentException("Number can't ba NaN");
-        if (double.IsInfinity(number)) throw new ArgumentException("Number can't be infinity");
+        if (double.IsNaN(number))
+        {
+            throw new ArgumentException($"{nameof(number)} can't ba NaN");
+        }
+
+        if (double.IsInfinity(number))
+        {
+            throw new ArgumentException($"{nameof(number)} can't be infinity");
+        }
 
         string strFormat = number.ToString();
         StringBuilder resultStr = new();

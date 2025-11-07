@@ -27,7 +27,6 @@ public class GcdTests
 
 
     [Theory]
-    // Arrange
     [InlineData(54, 24, 18, 6)] 
     [InlineData(48, 18, 30, 6)] 
     [InlineData(-48, 18, 30, 6)]
@@ -44,7 +43,6 @@ public class GcdTests
     }
 
     [Theory]
-    // Arrange
     [InlineData(54, 24, 18, 6)]
     [InlineData(48, 18, 30, 6)]
     [InlineData(-48, 18, 30, 6)]
@@ -53,7 +51,6 @@ public class GcdTests
     [InlineData(int.MinValue, int.MaxValue, 0, 1)]
     public void GetGcdStein_ReturnsExpected(int a, int b, int c, int expected)
     {
-
         // Act
         var result = GCD.GetGcdStein(a, b, c);
 
@@ -63,12 +60,10 @@ public class GcdTests
 
 
     [Theory]
-    // Arrange
     [InlineData(54, 24, 18, 6)]
     [InlineData(48, 18, 30, 6)]
     public void GetGcdEuclideanWithTime_ReturnsExpectedAndElapsed(int a, int b, int c, int expected)
     {
-
         // Act
         var result = GCD.GetGcdEuclidean(a, b, out long elapsed, c);
 
@@ -78,12 +73,10 @@ public class GcdTests
     }
 
     [Theory]
-    // Arrange
     [InlineData(54, 24, 18, 6)]
     [InlineData(48, 18, 30, 6)]
     public void GetGcdSteinWithTime_ReturnsExpectedAndElapsed(int a, int b, int c, int expected)
     {
-
         // Act
         var result = GCD.GetGcdStein(a, b, out long elapsed, c);
 

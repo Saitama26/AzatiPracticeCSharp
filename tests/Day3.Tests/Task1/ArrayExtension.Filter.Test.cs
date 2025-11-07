@@ -25,7 +25,6 @@ public class ArrayExtensionFilterTest
     }
 
     [Theory]
-    // Arrange
     [InlineData(new int[] { 12, 23, 34 }, 2, new int[] { 12, 23 })]
     [InlineData(new int[] { 45, 56, 67 }, 7, new int[] { 67 })]
     public void Filter_ByContainDigit_ReturnsExpected(int[] source, int digit, int[] expected)
@@ -39,7 +38,6 @@ public class ArrayExtensionFilterTest
     }
 
     [Theory]
-    // Arrange
     [InlineData(new int[] { 1, 2, 3, 4 }, new int[] { 2, 4 })]
     [InlineData(new int[] { -5, -2, 0, 7 }, new int[] { -2, 0 })]
     public void Filter_ByEvenNumbers_ReturnsExpected(int[] source, int[] expected)
@@ -52,7 +50,6 @@ public class ArrayExtensionFilterTest
     }
 
     [Theory]
-    // Arrange
     [InlineData(new int[] { 121, 44, 1331, 123 }, new int[] { 121, 44, 1331 })]
     [InlineData(new int[] { 10, 22, 303, 45 }, new int[] { 22, 303 })]
     public void Filter_ByPalindrome_ReturnsExpected(int[] source, int[] expected)

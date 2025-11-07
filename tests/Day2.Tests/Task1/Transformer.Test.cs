@@ -4,7 +4,6 @@ namespace Day2.Tests.Task1;
 public class TransformerTest
 {
     [Theory]
-    //Arrange 
     [InlineData(0, "zero")]
     [InlineData(12, "one two")]
     [InlineData(-45, "minus four five")]
@@ -47,6 +46,5 @@ public class TransformerTest
 
         // Act & Assert
         Assert.Throws<ArgumentException>(() => Transformer.TransformToWordsEng(number));
-
     }
 }

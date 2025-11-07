@@ -94,8 +94,6 @@ public static class GCD
         return gcd;
     }
 
-
-
     private static int GetGcdEuclidean(int a, int b)
     {
         long x = Math.Abs((long)a);
@@ -134,5 +132,4 @@ public static class GCD
         else
             return GetGcdStein((int)a, (int)((b - a) >> 1));
     }
-
 }

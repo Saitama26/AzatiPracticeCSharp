@@ -6,8 +6,9 @@ public class Polynomial
 
     public Polynomial(params double[] coefficients)
     {
-        if (coefficients == null || coefficients.Length == 0)
+        if (coefficients == null || coefficients.Length == 0){
             throw new ArgumentException("Polynomial must have at least one coefficient.");
+        }
 
         _coefficients = new double[coefficients.Length];
         Array.Copy(coefficients, _coefficients, coefficients.Length);
@@ -19,8 +20,14 @@ public class Polynomial
 
     public static Polynomial operator +(Polynomial left, Polynomial right)
     {
-        if (left is null) throw new ArgumentNullException(nameof(left));
-        if (right is null) throw new ArgumentNullException(nameof(right));
+        if (left is null) 
+        {
+            throw new ArgumentNullException($"{nameof(left)} cant be null");
+        }
+        if (right is null) 
+        {
+            throw new ArgumentNullException($"{nameof(right)} cant be null" ); 
+        }
 
         int MaxDegree = Math.Max(left.GetDegree, right.GetDegree);
         double[] coefficients = new double[MaxDegree + 1];
@@ -33,8 +40,14 @@ public class Polynomial
 
     public static Polynomial operator -(Polynomial left, Polynomial right)
     {
-        if (left is null) throw new ArgumentNullException(nameof(left));
-        if (right is null) throw new ArgumentNullException(nameof(right));
+        if (left is null)
+        {
+            throw new ArgumentNullException($"{nameof(left)} cant be null");
+        }
+        if (right is null)
+        {
+            throw new ArgumentNullException($"{nameof(right)} cant be null");
+        }
 
         int MaxDegree = Math.Max(left.GetDegree, right.GetDegree);
         double[] coefficients = new double[MaxDegree + 1];
@@ -47,9 +60,15 @@ public class Polynomial
 
     public static Polynomial operator *(Polynomial left, Polynomial right)
     {
-        if (left is null) throw new ArgumentNullException(nameof(left));
-        if (right is null) throw new ArgumentNullException(nameof(right));
-        
+        if (left is null)
+        {
+            throw new ArgumentNullException($"{nameof(left)} cant be null");
+        }
+        if (right is null)
+        {
+            throw new ArgumentNullException($"{nameof(right)} cant be null");
+        }
+
         double[] coefficients = new double[left.GetDegree + right.GetDegree + 1];
 
         for (int i = 0; i <= left.GetDegree; i++)
@@ -125,8 +144,7 @@ public class Polynomial
             };
             terms.Add(term);
         }
+     
         return string.Join(" + ", terms);
-
     }
-
 }

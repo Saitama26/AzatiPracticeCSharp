@@ -6,7 +6,6 @@ namespace Day3.Tests.Task2;
 public class ArrayExtensionTransformTest
 {
     [Theory]
-    // Arrange
     [InlineData(new double[] { -23.809 }, new string[] { "minus two three point eight zero nine" })]
     [InlineData(new double[] { 0.295 }, new string[] { "zero point two nine five" })]
     [InlineData(new double[] { 15.17 }, new string[] { "one five point one seven" })]
@@ -21,7 +20,6 @@ public class ArrayExtensionTransformTest
     }
 
     [Theory]
-    // Arrange
     [InlineData(new double[] { -23.809 }, new string[] { "минус два три точка восемь ноль девять" })]
     [InlineData(new double[] { 0.295 }, new string[] { "ноль точка два девять пять" })]
     [InlineData(new double[] { 15.17 }, new string[] { "один пять точка один семь" })]
@@ -54,5 +52,4 @@ public class ArrayExtensionTransformTest
         // Act & Assert
         Assert.Throws<ArgumentNullException>(() => input.Transform<string>(null));
     }
-
 }

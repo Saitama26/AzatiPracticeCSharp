@@ -19,12 +19,24 @@ public static partial class Algorithms
     /// Thrown if <paramref name="n"/> is not positive or if trying to
     /// compute an even root of a negative number.
     /// </exception>
-    public static double FindNthRoot(double value, int degree, int accuracy)
+    public static double FindNthRoot(double value, int degree, int accuracy = 1)
     {
         if (value == 0) return 0;
-        if (double.IsNaN(value)) throw new ArgumentException("Числе не должно быть NaN");
-        if(degree < 0) throw new Exception("Степень должна быть положительной");
-        if(value < 0 && degree % 2 == 0) throw new Exception("Невозможно найти четный корень из отрицательного числа");
+        if (double.IsNaN(value))
+            throw new ArgumentException("Value must not be NaN", nameof(value));
+
+        if (degree < 0)
+            throw new ArgumentOutOfRangeException(nameof(degree), "Degree must be positive");
+
+        if (accuracy < 0)
+            throw new ArgumentOutOfRangeException(nameof(accuracy), "Accuracy must be positive");
+
+        if (double.IsInfinity(value))
+            throw new ArgumentException("Value must not be infinity", nameof(value));
+
+        if (value < 0 && degree % 2 == 0)
+            throw new ArgumentException("Cannot compute even root of a negative number", nameof(value));
+
 
         double x = value > 1 ? value : 1;
         double prev = 0;
@@ -46,6 +58,4 @@ public static partial class Algorithms
 
         return Math.Truncate(value * factor) / factor;
     }
-
-
 }
