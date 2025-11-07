@@ -2,10 +2,10 @@ using Day3.task1_3;
 
 namespace Day3.Tests.Task1;
 
-public class ArrayExtensionFilterTest
+public class ArrayExtensionFilterTests
 {
     [Fact]
-    public void Filter_ArrayIsNull_ThrowsArgumentNullException()
+    public void Filter_ArrayIsNull_ThrowsArgumentNullException_WhenArrayIsNull()
     {
         // Arrange
         int[] array = null;
@@ -15,7 +15,7 @@ public class ArrayExtensionFilterTest
     }
 
     [Fact]
-    public void Filter_PredicateIsNull_ThrowsArgumentNullException()
+    public void Filter_PredicateIsNull_ThrowsArgumentNullException_WhenPredicateIsNull()
     {
         // Arrange
         int[] array = { 1, 2, 3 };

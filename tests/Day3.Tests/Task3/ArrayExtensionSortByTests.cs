@@ -2,7 +2,7 @@
 
 namespace Day3.Tests.Task3;
 
-public class ArrayExtensionSortByTest
+public class ArrayExtensionSortByTests
 {
     [Fact]
     public void SortBy_LengthAscending()
@@ -61,7 +61,7 @@ public class ArrayExtensionSortByTest
     }
 
     [Fact]
-    public void SortBy_ThrowsIfArrayIsNull()
+    public void SortBy_ArrayIsNull_ThrowsArgumentNullException_WhenArrayIsNull()
     {
         // Arrange
         string[] input = null;
@@ -72,7 +72,7 @@ public class ArrayExtensionSortByTest
     }
 
     [Fact]
-    public void SortBy_ThrowsIfFuncIsNull()
+    public void SortBy_ComparerIsNull_ThrowsArgumentNullException_WhenComparerIsNull()
     {
         // Arrange
         string[] input = { "apple", "banana" };
@@ -81,4 +81,5 @@ public class ArrayExtensionSortByTest
         Assert.Throws<ArgumentNullException>(() =>
             input.SortBy(null));
     }
+
 }

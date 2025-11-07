@@ -1,7 +1,7 @@
 ﻿using Day2.Task1_2;
 
 namespace Day2.Tests.Task2;
-public class TransformerArrayTest
+public class TransformerArrayTests
 {
     [Theory]
     [InlineData(new double[] { -23.809 }, new string[] { "minus two three point eight zero nine" })]
@@ -22,7 +22,7 @@ public class TransformerArrayTest
     }
 
     [Fact]
-    public void GetStringRepresentation_NullArray_ThrowsException()
+    public void GetStringRepresentation_NullArray_ThrowsArgumentNullException_WhenArrayIsNull()
     {
         // Arrange
         double[] numbers = null;
@@ -32,7 +32,7 @@ public class TransformerArrayTest
     }
 
     [Fact]
-    public void GetStringRepresentation_EmptyArray_ThrowsException()
+    public void GetStringRepresentation_EmptyArray_ThrowsArgumentException_WhenArrayIsEmpty()
     {
         // Arrange
         double[] numbers = Array.Empty<double>();
@@ -42,7 +42,7 @@ public class TransformerArrayTest
     }
 
     [Fact]
-    public void GetStringRepresentation_ArrayWithNaN_ThrowsException()
+    public void GetStringRepresentation_ArrayWithNaN_ThrowsArgumentException_WhenArrayContainsNaN()
     {
         // Arrange
         double[] numbers = { 1.0, double.NaN };
@@ -52,7 +52,7 @@ public class TransformerArrayTest
     }
 
     [Fact]
-    public void GetStringRepresentation_ArrayWithPositiveInfinity_ThrowsException()
+    public void GetStringRepresentation_ArrayWithPositiveInfinity_ThrowsArgumentException_WhenArrayContainsPositiveInfinity()
     {
         // Arrange
         double[] numbers = { 1.0, double.PositiveInfinity };
@@ -62,7 +62,7 @@ public class TransformerArrayTest
     }
 
     [Fact]
-    public void GetStringRepresentation_ArrayWithNegativeInfinity_ThrowsException()
+    public void GetStringRepresentation_ArrayWithNegativeInfinity_ThrowsArgumentException_WhenArrayContainsNegativeInfinity()
     {
         // Arrange
         double[] numbers = { 1.0, double.NegativeInfinity };

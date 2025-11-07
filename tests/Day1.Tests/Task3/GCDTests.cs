@@ -2,11 +2,11 @@
 
 namespace Day1.Tests.Task3;
 
-public class GcdTests
+public class GСDTests
 {
 
     [Fact]
-    public void GetGcdEuclidean_AllZeros_ThrowsArgumentException()
+    public void GetGcdEuclidean_AllZeros_ThrowsArgumentException_WhenAllValuesAreZero()
     {
         // Arrange
         int a = 0, b = 0, c = 0;
@@ -16,7 +16,7 @@ public class GcdTests
     }
 
     [Fact]
-    public void GetGcdStein_AllZeros_ThrowsArgumentException()
+    public void GetGcdStein_AllZeros_ThrowsArgumentException_WhenAllValuesAreZero()
     {
         // Arrange
         int a = 0, b = 0, c = 0;
@@ -24,6 +24,7 @@ public class GcdTests
         // Act & Assert
         Assert.Throws<ArgumentException>(() => GCD.GetGcdStein(a, b, c));
     }
+
 
 
     [Theory]

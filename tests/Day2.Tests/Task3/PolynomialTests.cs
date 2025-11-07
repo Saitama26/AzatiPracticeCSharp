@@ -1,7 +1,7 @@
 ﻿using Day2.Task3;
 
 namespace Day2.Tests.Task3;
-public class PolynomialTest
+public class PolynomialTests
 {
     [Theory]
     [InlineData(new double[] { 1, 2 }, new double[] { 3, 4 }, new double[] { 4, 6 })]

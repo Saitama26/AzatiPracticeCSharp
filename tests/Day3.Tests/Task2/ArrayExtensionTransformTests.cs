@@ -3,7 +3,7 @@ using Day2.Task1_2;
 
 namespace Day3.Tests.Task2;
 
-public class ArrayExtensionTransformTest
+public class ArrayExtensionTransformTests
 {
     [Theory]
     [InlineData(new double[] { -23.809 }, new string[] { "minus two three point eight zero nine" })]
@@ -34,7 +34,7 @@ public class ArrayExtensionTransformTest
     }
 
     [Fact]
-    public void Transform_ThrowsIfArrayIsNull()
+    public void Transform_ArrayIsNull_ThrowsArgumentNullException_WhenArrayIsNull()
     {
         // Arrange
         double[] input = null;
@@ -44,7 +44,7 @@ public class ArrayExtensionTransformTest
     }
 
     [Fact]
-    public void Transform_ThrowsIfFuncIsNull()
+    public void Transform_FuncIsNull_ThrowsArgumentNullException_WhenFuncIsNull()
     {
         // Arrange
         double[] input = { 1.0 };

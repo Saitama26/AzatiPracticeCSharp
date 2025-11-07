@@ -22,7 +22,7 @@ public partial class AlgorithmsTests
     }
 
     [Fact]
-    public void FindNthRoot_NegativeDegree_ThrowsArgumentOutOfRange()
+    public void FindNthRoot_NegativeDegree_ThrowsArgumentOutOfRange_WhenDegreeIsNegative()
     {
         // Arrange
         var value = 15.5;
@@ -34,7 +34,7 @@ public partial class AlgorithmsTests
     }
 
     [Fact]
-    public void FindNthRoot_NegativeAccuracy_ThrowsArgumentOutOfRange()
+    public void FindNthRoot_NegativeAccuracy_ThrowsArgumentOutOfRange_WhenAccuracyIsNegative()
     {
         // Arrange
         var value = 15.5;
@@ -46,7 +46,7 @@ public partial class AlgorithmsTests
     }
 
     [Fact]
-    public void FindNthRoot_NegativeInfinity_ThrowsArgumentException()
+    public void FindNthRoot_NegativeInfinity_ThrowsArgumentException_WhenValueIsNegativeInfinity()
     {
         // Arrange
         var value = double.NegativeInfinity;
@@ -58,7 +58,7 @@ public partial class AlgorithmsTests
     }
 
     [Fact]
-    public void FindNthRoot_PositiveInfinity_ThrowsArgumentException()
+    public void FindNthRoot_PositiveInfinity_ThrowsArgumentException_WhenValueIsPositiveInfinity()
     {
         // Arrange
         var value = double.PositiveInfinity;
@@ -70,7 +70,7 @@ public partial class AlgorithmsTests
     }
 
     [Fact]
-    public void FindNthRoot_IsNaN_ThrowsArgumentException()
+    public void FindNthRoot_NaN_ThrowsArgumentException_WhenValueIsNaN()
     {
         // Arrange
         var value = double.NegativeInfinity;
@@ -86,7 +86,7 @@ public partial class AlgorithmsTests
     [InlineData(-16, 2, 2)]  
     [InlineData(-8, 4, 2)]   
     [InlineData(-1, 10, 2)] 
-    public void FindNthRoot_NegativeValueEvenDegree_ThrowsArgumentException(double value, int degree, int accuracy)
+    public void FindNthRoot_NegativeValueEvenDegree_ThrowsArgumentException_WhenValueIsNegative(double value, int degree, int accuracy)
     {
         // Act & Assert
         Assert.Throws<ArgumentException>(() => Algorithms.FindNthRoot(value, degree, accuracy));

@@ -1,7 +1,7 @@
 using Day2.Task1_2;
 
 namespace Day2.Tests.Task1;
-public class TransformerTest
+public class TransformerTests
 {
     [Theory]
     [InlineData(0, "zero")]
@@ -19,7 +19,7 @@ public class TransformerTest
     }
 
     [Fact]
-    public void TransformToWordsEng_ThrowNaNException()
+    public void TransformToWordsEng_NaNValue_ThrowsArgumentException_WhenValueIsNaN()
     {
         //Arrange
         var number = double.NaN;
@@ -29,7 +29,7 @@ public class TransformerTest
     }
 
     [Fact]
-    public void TransformToWordsEng_ThrowPosInfinityException()
+    public void TransformToWordsEng_PositiveInfinity_ThrowsArgumentException_WhenValueIsPositiveInfinity()
     {
         //Arrange
         var number = double.PositiveInfinity;
@@ -39,7 +39,7 @@ public class TransformerTest
     }
 
     [Fact]
-    public void TransformToWordsEng_ThrowNegInfinityException()
+    public void TransformToWordsEng_NegativeInfinity_ThrowsArgumentException_WhenValueIsNegativeInfinity()
     {
         // Arrange
         var number = double.NegativeInfinity;

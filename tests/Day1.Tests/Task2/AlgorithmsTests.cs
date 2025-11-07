@@ -24,7 +24,7 @@ public partial class AlgorithmsTests
     }
 
     [Fact]
-    public void NextBiggerThan_NegariveNumber_ThrowExeption()
+    public void NextBiggerThan_NegativeNumber_ThrowsArgumentException_WhenValueIsMinValue()
     {
         //Arrange
         var number = int.MinValue;
