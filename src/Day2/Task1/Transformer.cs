@@ -44,7 +44,7 @@ public static partial class Transformer
 
 
     /// <summary>
-    /// Converts a <see cref="double"/> number into its word-based representation.
+    /// Converts a <see cref="double"/> number into its word-based eng-representation.
     /// For example: -23.809 → "minus two three point eight zero nine".
     /// </summary>
     /// <param name="number">The number to be transformed.</param>
@@ -72,6 +72,18 @@ public static partial class Transformer
         return resultStr.ToString().TrimEnd();
     }
 
+    /// <summary>
+    /// Converts a <see cref="double"/> number into its word-based rus-representation.
+    /// For example: -23.809 → "минус два три точка восемь ноль деаять".
+    /// </summary>
+    /// <param name="number">The number to be transformed.</param>
+    /// <returns>
+    /// A string containing the word representation of the number.
+    /// </returns>
+    /// <exception cref="ArgumentException">
+    /// Thrown when the number is <see cref="double.NaN"/> or <see cref="double.PositiveInfinity"/> /
+    /// <see cref="double.NegativeInfinity"/>, or when the number contains unsupported characters.
+    /// </exception>
     public static string TransformToWordsRus(double number)
     {
         if (double.IsNaN(number)) throw new ArgumentException("Number can't ba NaN");

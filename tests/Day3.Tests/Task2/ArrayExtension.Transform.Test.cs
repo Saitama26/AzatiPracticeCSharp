@@ -35,8 +35,6 @@ public class ArrayExtensionTransformTest
         Assert.Equal(expected, result);
     }
 
-    // ---------- Ошибки через Fact ----------
-
     [Fact]
     public void Transform_ThrowsIfArrayIsNull()
     {

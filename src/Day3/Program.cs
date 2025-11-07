@@ -1,6 +1,4 @@
-﻿using Day3.task1_3;
-
-namespace Day3Solution
+﻿namespace Day3
 {
     internal class Program
     {

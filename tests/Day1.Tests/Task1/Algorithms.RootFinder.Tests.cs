@@ -1,6 +1,6 @@
 using Day1.Task1_2;
 
-namespace Day1Tests;
+namespace Day1.Tests.Task1;
 
 public class AlgorithmsRootFinderTests
 {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Day3.task1_3
+﻿namespace Day3.task1_3
 {
     public static partial class ArrayExtension
     {

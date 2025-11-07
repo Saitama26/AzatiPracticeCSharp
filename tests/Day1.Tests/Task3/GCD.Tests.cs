@@ -1,6 +1,6 @@
 ﻿using Day1.Task3;
 
-namespace Day1Tests;
+namespace Day1.Tests.Task3;
 
 public class GcdTests
 {

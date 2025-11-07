@@ -7,13 +7,13 @@ public class ArrayExtensionSortByTest
     [Fact]
     public void SortBy_LengthAscending()
     {
-        // Arrange: исходный массив строк
+        // Arrange
         string[] input = { "apple", "kiwi", "banana", "pear" };
 
-        // Act: сортировка по возрастанию длины строки
+        // Act: сортировка по длине строки
         string[] result = input.SortBy((x, y) => x.Length.CompareTo(y.Length));
 
-        // Assert: ожидаемый порядок — сначала короткие строки
+        // Assert
         Assert.Equal(new[] { "kiwi", "pear", "apple", "banana" }, result);
     }
 
@@ -26,7 +26,7 @@ public class ArrayExtensionSortByTest
         // Act: сортировка по убыванию длины строки
         string[] result = input.SortBy((x, y) => y.Length.CompareTo(x.Length));
 
-        // Assert: сначала длинные строки
+        // Assert
         Assert.Equal(new[] { "banana", "apple", "kiwi", "pear" }, result);
     }
 
@@ -41,7 +41,7 @@ public class ArrayExtensionSortByTest
         string[] result = input.SortBy((x, y) =>
             x.Count(c => c == symbol).CompareTo(y.Count(c => c == symbol)));
 
-        // Assert: строки с меньшим количеством 'a' идут раньше
+        // Assert
         Assert.Equal(new[] { "kiwi", "apple", "pear", "banana" }, result);
     }
 
@@ -56,7 +56,7 @@ public class ArrayExtensionSortByTest
         string[] result = input.SortBy((x, y) =>
             y.Count(c => c == symbol).CompareTo(x.Count(c => c == symbol)));
 
-        // Assert: строки с большим количеством 'a' идут раньше
+        // Assert
         Assert.Equal(new[] { "banana", "apple", "pear", "kiwi" }, result);
     }
 
