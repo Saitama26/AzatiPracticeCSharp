@@ -1,6 +1,5 @@
 ﻿using Day3.Task1_3.Interfaces;
 namespace Day3.Task1_3.Filters;
-
 public class ContainsDigitFilter : IPredicate<int>
 {
     private readonly int _digit;

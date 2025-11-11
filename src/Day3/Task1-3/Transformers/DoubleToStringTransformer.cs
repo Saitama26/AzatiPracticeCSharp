@@ -1,6 +1,5 @@
 ﻿using Day2.Task1_2;
 using Day3.Task1_3.Interfaces;
-
 namespace Day3.Task1_3.Transformers;
 
 public class DoubleToStringTransformer : ITransformer<double, string>

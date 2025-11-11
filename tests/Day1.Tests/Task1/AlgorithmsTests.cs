@@ -90,4 +90,3 @@ public partial class AlgorithmsTests
         Assert.Throws<ArgumentException>(() => Algorithms.FindNthRoot(value, degree, accuracy));
     }
 }
-

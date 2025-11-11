@@ -1,5 +1,4 @@
 ﻿namespace Day3.Task1_3.Comparers;
-
 public class StringLengthAscendingComparer : IComparer<string>
 {
     public int Compare(string? x, string? y)

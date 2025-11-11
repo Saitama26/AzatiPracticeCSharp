@@ -1,5 +1,4 @@
 ﻿namespace Day3.Task1_3.Comparers;
-
 public class CharCountDescendingComparer : IComparer<string>
 {
     private readonly char _symbol;

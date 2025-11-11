@@ -1,6 +1,4 @@
 ﻿using Day3.Task1_3.Interfaces;
-using System.Diagnostics;
-
 namespace Day3.Task1_3;
 
 public static partial class ArrayExtension

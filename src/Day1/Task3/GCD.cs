@@ -1,7 +1,5 @@
 ﻿using System.Diagnostics;
-
 namespace Day1.Task3;
-
 public static class GCD
 {
     /// <summary>
