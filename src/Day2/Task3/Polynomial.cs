@@ -1,5 +1,5 @@
 ﻿namespace Day2.Task3;
-public class Polynomial
+public class Polynomial : IEquatable<Polynomial>, ICloneable, IComparable<Polynomial>
 {
     private readonly double[] _coefficients;
     private int GetDegree => _coefficients.Length - 1;
@@ -82,18 +82,10 @@ public class Polynomial
 
     public static bool operator ==(Polynomial left, Polynomial right)
     {
-        if (left.Equals(right)) return true;
+        if (ReferenceEquals(left, right)) return true;
         if (left is null || right is null) return false;
 
-        if (left.GetDegree != right.GetDegree) return false;
-
-        for (int i = 0; i <= left.GetDegree; i++)
-        {
-            if (left[i] != right[i])
-                return false;
-        }
-
-        return true;
+        return left.Equals(right);
     }
 
     public static bool operator !=(Polynomial left, Polynomial right)
@@ -103,30 +95,19 @@ public class Polynomial
 
     public override bool Equals(object? obj)
     {
-        if (ReferenceEquals (this, obj)) return true;
-        if (obj == null || obj.GetType() != typeof(Polynomial)) return false;
-
-        var other = obj as Polynomial;
-
-        if (_coefficients.Length != other.GetDegree) return false;
-
-        for (int i = 0; i <= other.GetDegree; i++)
-        {
-            if (this[i] != other[i])
-                return false;
-        }
+        return Equals(obj as Polynomial);
         
-        return true;
     }
 
     public override int GetHashCode()
     {
-        var rnd = new Random();
-        var hash = 1;
-        foreach (var c in _coefficients)
-            hash = hash * rnd.Next(30, 100) + c.GetHashCode();
-        
-        return hash;
+        unchecked
+        {
+            int hash = 17;
+            foreach (var c in _coefficients)
+                hash = hash * 31 + c.GetHashCode();
+            return hash;
+        }
     }
 
     public override string ToString()
@@ -147,5 +128,42 @@ public class Polynomial
         }
      
         return string.Join(" + ", terms);
+    }
+
+    public bool Equals(Polynomial? other)
+    {
+        if (other == null) return false;
+        
+        if (_coefficients.Length - 1 != other.GetDegree) return false;
+
+        for (int i = 0; i <= other.GetDegree; i++)
+        {
+            if (this[i] != other[i])
+                return false;
+        }
+
+        return true;
+    }
+
+    public object Clone()
+    {
+        return new Polynomial((double[])_coefficients.Clone());
+    }
+
+    public int CompareTo(Polynomial? other)
+    {
+        if (other == null) return 1; 
+
+        if (GetDegree != other.GetDegree)
+            return GetDegree.CompareTo(other.GetDegree);
+
+        for (int i = GetDegree; i >= 0; i--)
+        {
+            int cmp = _coefficients[i].CompareTo(other[i]);
+            if (cmp != 0)
+                return cmp;
+        }
+
+        return 0;
     }
 }
