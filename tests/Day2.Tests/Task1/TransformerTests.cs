@@ -1,5 +1,4 @@
 using Day2.Task1_2;
-
 namespace Day2.Tests.Task1;
 public class TransformerTests
 {
@@ -12,7 +11,7 @@ public class TransformerTests
     public void TransformNumberToWordsTest(double number, string expected)
     {
         // Act
-        var result = Transformer.TransformToWordsEng(number);
+        var result = Transformer.TransformToWords(number, "eng");
 
         // Assert
         Assert.Equal(expected, result);
@@ -25,7 +24,7 @@ public class TransformerTests
         var number = double.NaN;
 
         //Assert & Act
-        Assert.Throws<ArgumentException>(() => Transformer.TransformToWordsEng(number));
+        Assert.Throws<ArgumentException>(() => Transformer.TransformToWords(number, "eng"));
     }
 
     [Fact]
@@ -35,7 +34,7 @@ public class TransformerTests
         var number = double.PositiveInfinity;
 
         //Assert & Act
-        Assert.Throws<ArgumentException>(() => Transformer.TransformToWordsEng(number));
+        Assert.Throws<ArgumentException>(() => Transformer.TransformToWords(number, "eng"));
     }
 
     [Fact]
@@ -45,6 +44,6 @@ public class TransformerTests
         var number = double.NegativeInfinity;
 
         // Act & Assert
-        Assert.Throws<ArgumentException>(() => Transformer.TransformToWordsEng(number));
+        Assert.Throws<ArgumentException>(() => Transformer.TransformToWords(number, "eng"));
     }
 }

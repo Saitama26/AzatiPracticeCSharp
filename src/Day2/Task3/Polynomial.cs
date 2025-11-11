@@ -1,22 +1,20 @@
 ﻿namespace Day2.Task3;
-
 public class Polynomial
 {
     private readonly double[] _coefficients;
+    private int GetDegree => _coefficients.Length - 1;
+    private double this[int i] => i >= 0 && i < _coefficients.Length ? _coefficients[i] : 0;
 
     public Polynomial(params double[] coefficients)
     {
-        if (coefficients == null || coefficients.Length == 0){
+        if (coefficients == null || coefficients.Length == 0)
+        {
             throw new ArgumentException("Polynomial must have at least one coefficient.");
         }
 
         _coefficients = new double[coefficients.Length];
         Array.Copy(coefficients, _coefficients, coefficients.Length);
     }
-
-    public int GetDegree => _coefficients.Length - 1;
-    private double this[int i] => i >= 0 && i < _coefficients.Length ? _coefficients[i] : 0;
-
 
     public static Polynomial operator +(Polynomial left, Polynomial right)
     {
@@ -29,7 +27,7 @@ public class Polynomial
             throw new ArgumentNullException($"{nameof(right)} cant be null" ); 
         }
 
-        int MaxDegree = Math.Max(left.GetDegree, right.GetDegree);
+        var MaxDegree = Math.Max(left.GetDegree, right.GetDegree);
         double[] coefficients = new double[MaxDegree + 1];
 
         for (int i = 0; i <= MaxDegree; i++)
@@ -49,7 +47,7 @@ public class Polynomial
             throw new ArgumentNullException($"{nameof(right)} cant be null");
         }
 
-        int MaxDegree = Math.Max(left.GetDegree, right.GetDegree);
+        var MaxDegree = Math.Max(left.GetDegree, right.GetDegree);
         double[] coefficients = new double[MaxDegree + 1];
 
         for (int i = 0; i <= MaxDegree; i++)
@@ -84,7 +82,7 @@ public class Polynomial
 
     public static bool operator ==(Polynomial left, Polynomial right)
     {
-        if (ReferenceEquals(left, right)) return true;
+        if (left.Equals(right)) return true;
         if (left is null || right is null) return false;
 
         if (left.GetDegree != right.GetDegree) return false;
@@ -110,7 +108,7 @@ public class Polynomial
 
         var other = obj as Polynomial;
 
-        if (this._coefficients.Length != other.GetDegree) return false;
+        if (_coefficients.Length != other.GetDegree) return false;
 
         for (int i = 0; i <= other.GetDegree; i++)
         {
@@ -124,7 +122,7 @@ public class Polynomial
     public override int GetHashCode()
     {
         var rnd = new Random();
-        int hash = 1;
+        var hash = 1;
         foreach (var c in _coefficients)
             hash = hash * rnd.Next(30, 100) + c.GetHashCode();
         
@@ -136,10 +134,10 @@ public class Polynomial
         var terms = new List<string>();
         for (int i = _coefficients.Length - 1; i >= 0; i--)
         {
-            double coeff = _coefficients[i];
+            var coeff = _coefficients[i];
             if (coeff == 0) continue;
 
-            string term = i switch
+            var term = i switch
             {
                 0 => $"{coeff}",
                 1 => $"{coeff}x",

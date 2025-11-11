@@ -1,5 +1,4 @@
 ﻿using Day2.Task3;
-
 namespace Day2.Tests.Task3;
 public class PolynomialTests
 {

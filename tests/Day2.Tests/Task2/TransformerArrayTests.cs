@@ -1,5 +1,4 @@
 ﻿using Day2.Task1_2;
-
 namespace Day2.Tests.Task2;
 public class TransformerArrayTests
 {

@@ -1,7 +1,5 @@
 ﻿using Day1.Task3;
-
 namespace Day1.Tests.Task3;
-
 public class GСDTests
 {
 
@@ -24,8 +22,6 @@ public class GСDTests
         // Act & Assert
         Assert.Throws<ArgumentException>(() => GCD.GetGcdStein(a, b, c));
     }
-
-
 
     [Theory]
     [InlineData(54, 24, 18, 6)] 
@@ -58,7 +54,6 @@ public class GСDTests
         // Assert
         Assert.Equal(expected, result);
     }
-
 
     [Theory]
     [InlineData(54, 24, 18, 6)]

@@ -1,5 +1,4 @@
 ﻿namespace Day2.Task1_2;
-
 public static partial class Transformer
 {
     /// <summary>
@@ -17,23 +16,27 @@ public static partial class Transformer
     /// </exception>
     public static string[] GetStringRepresentation(this double[] numbers)
     {
-        if (numbers == null){
+        if (numbers == null)
+        {
             throw new ArgumentNullException(nameof(numbers), "Array of numbers cannot be null.");
         }
-        if (numbers.Length == 0){
+        if (numbers.Length == 0)
+        {
             throw new ArgumentException("Array of numbers must contain at least one element.", nameof(numbers));
         }
-        if (numbers.Any(double.IsNaN)){
+        if (numbers.Any(double.IsNaN))
+        {
             throw new ArgumentException("Array contains NaN values.", nameof(numbers));
         }
-        if (numbers.Contains(double.PositiveInfinity) || numbers.Contains(double.NegativeInfinity)){
+        if (numbers.Contains(double.PositiveInfinity) || numbers.Contains(double.NegativeInfinity))
+        {
             throw new ArgumentException("Array contains Infinity values.", nameof(numbers));
         }
 
-        string[] result = new string[numbers.Length];
+        var result = new string[numbers.Length];
         for (int i = 0; i < numbers.Length; i++)
         {
-            result[i] = TransformToWordsEng(numbers[i]);
+            result[i] = TransformToWords(numbers[i], "eng");
         }
 
         return result;

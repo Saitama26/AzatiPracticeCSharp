@@ -1,7 +1,5 @@
 ﻿using System.Text;
-
 namespace Day2.Task1_2;
-
 public static partial class Transformer
 {
     private static readonly Dictionary<char, string> NumberWordsEnglish = new Dictionary<char, string>
@@ -42,56 +40,18 @@ public static partial class Transformer
             { 'E', "E" }
         };
 
-
     /// <summary>
-    /// Converts a <see cref="double"/> number into its word-based eng-representation.
-    /// For example: -23.809 → "minus two three point eight zero nine".
+    /// Converts a <see cref="double"/> number into its word-based eng-rus-representation.
     /// </summary>
     /// <param name="number">The number to be transformed.</param>
-    /// <returns>
-    /// A string containing the word representation of the number.
-    /// </returns>
+    /// <param name="language"></param>
+    /// <returns></returns>
     /// <exception cref="ArgumentException">
     /// Thrown when the number is <see cref="double.NaN"/> or <see cref="double.PositiveInfinity"/> /
     /// <see cref="double.NegativeInfinity"/>, or when the number contains unsupported characters.
+    /// Also when <see cref="string"/> is null or empty, or when the language is not supported.;
     /// </exception>
-    public static string TransformToWordsEng(double number)
-    {
-        if (double.IsNaN(number)) 
-        {
-            throw new ArgumentException($"{nameof(number)} can't ba NaN"); 
-        }
-        
-        if (double.IsInfinity(number)) 
-        { 
-            throw new ArgumentException($"{nameof(number)} can't be infinity"); 
-        }
-
-        string strFormat = number.ToString();
-        StringBuilder resultStr = new();
-
-        foreach (char c in strFormat)
-        {
-            if (NumberWordsEnglish.ContainsKey(c))
-                resultStr.Append(NumberWordsEnglish[c] + " ");
-        }
-
-        return resultStr.ToString().TrimEnd();
-    }
-
-    /// <summary>
-    /// Converts a <see cref="double"/> number into its word-based rus-representation.
-    /// For example: -23.809 → "минус два три точка восемь ноль деаять".
-    /// </summary>
-    /// <param name="number">The number to be transformed.</param>
-    /// <returns>
-    /// A string containing the word representation of the number.
-    /// </returns>
-    /// <exception cref="ArgumentException">
-    /// Thrown when the number is <see cref="double.NaN"/> or <see cref="double.PositiveInfinity"/> /
-    /// <see cref="double.NegativeInfinity"/>, or when the number contains unsupported characters.
-    /// </exception>
-    public static string TransformToWordsRus(double number)
+    public static string TransformToWords(double number, string language)
     {
         if (double.IsNaN(number))
         {
@@ -103,13 +63,33 @@ public static partial class Transformer
             throw new ArgumentException($"{nameof(number)} can't be infinity");
         }
 
-        string strFormat = number.ToString();
+        if (string.IsNullOrEmpty(language))
+        {
+            throw new ArgumentException($"{nameof(language)} can't be empty");
+        }
+
+        var strFormat = number.ToString();
         StringBuilder resultStr = new();
 
-        foreach (char c in strFormat)
+        switch (language)
         {
-            if (NumberWordsRussian.ContainsKey(c))
-                resultStr.Append(NumberWordsRussian[c] + " ");
+            case "rus":
+                foreach (char c in strFormat)
+                {
+                    if (NumberWordsRussian.ContainsKey(c))
+                        resultStr.Append(NumberWordsRussian[c] + " ");
+                }
+                break;
+
+            case "eng":
+                foreach (char c in strFormat)
+                {
+                    if (NumberWordsEnglish.ContainsKey(c))
+                        resultStr.Append(NumberWordsEnglish[c] + " ");
+                }
+                break;
+            default:
+                throw new ArgumentException($"{nameof(language)}. Unknown language");
         }
 
         return resultStr.ToString().TrimEnd();

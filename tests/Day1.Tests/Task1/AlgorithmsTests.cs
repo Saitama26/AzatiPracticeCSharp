@@ -1,7 +1,5 @@
 using Day1.Task1;
-
 namespace Day1.Tests.Task1;
-
 public partial class AlgorithmsTests
 {
     [Theory]
