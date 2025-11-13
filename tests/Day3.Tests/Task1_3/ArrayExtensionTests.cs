@@ -1,8 +1,10 @@
-using Day3.Task1_3;
+п»їusing Day3.Task1_3;
 using Day3.Task1_3.Filters;
 using Day3.Task1_3.Transformers;
 using Day3.Task1_3.Comparers;
+
 namespace Day3.Tests.Task1_3;
+
 public class ArrayExtensionTests
 {
     [Fact]
@@ -68,20 +70,20 @@ public class ArrayExtensionTests
     public void Transform_ToEnglishWords_WorksCorrectly(double[] input, string[] expected)
     {
         // Act
-        string[] result = input.Transform(new DoubleToStringTransformer("eng"));
+        var result = input.Transform(new DoubleToStringTransformer("eng"));
 
         // Assert
         Assert.Equal(expected, result);
     }
 
     [Theory]
-    [InlineData(new double[] { -23.809 }, new string[] { "минус два три точка восемь ноль девять" })]
-    [InlineData(new double[] { 0.295 }, new string[] { "ноль точка два девять пять" })]
-    [InlineData(new double[] { 15.17 }, new string[] { "один пять точка один семь" })]
+    [InlineData(new double[] { -23.809 }, new string[] { "РјРёРЅСѓСЃ РґРІР° С‚СЂРё С‚РѕС‡РєР° РІРѕСЃРµРјСЊ РЅРѕР»СЊ РґРµРІСЏС‚СЊ" })]
+    [InlineData(new double[] { 0.295 }, new string[] { "РЅРѕР»СЊ С‚РѕС‡РєР° РґРІР° РґРµРІСЏС‚СЊ РїСЏС‚СЊ" })]
+    [InlineData(new double[] { 15.17 }, new string[] { "РѕРґРёРЅ РїСЏС‚СЊ С‚РѕС‡РєР° РѕРґРёРЅ СЃРµРјСЊ" })]
     public void Transform_ToRussianWords_WorksCorrectly(double[] input, string[] expected)
     {
         // Act
-        string[] result = input.Transform(new DoubleToStringTransformer("rus"));
+        var result = input.Transform(new DoubleToStringTransformer("rus"));
 
         // Assert
         Assert.Equal(expected, result);
@@ -94,7 +96,7 @@ public class ArrayExtensionTests
         string[] input = { "apple", "kiwi", "banana", "pear" };
 
         // Act
-        string[] result = input.SortBy(new StringLengthAscendingComparer());
+        var result = input.SortBy(new StringLengthAscendingComparer());
 
         // Assert
         Assert.Equal(new[] { "kiwi", "pear", "apple", "banana" }, result);
@@ -107,7 +109,7 @@ public class ArrayExtensionTests
         string[] input = { "apple", "kiwi", "banana", "pear" };
 
         // Act
-        string[] result = input.SortBy(new StringLengthDescendingComparer());
+        var result = input.SortBy(new StringLengthDescendingComparer());
 
         // Assert
         Assert.Equal(new[] { "banana", "apple", "kiwi", "pear" }, result);
@@ -120,7 +122,7 @@ public class ArrayExtensionTests
         string[] input = { "apple", "banana", "kiwi", "pear" };
 
         // Act
-        string[] result = input.SortBy(new CharCountAscendingComparer('a'));
+        var result = input.SortBy(new CharCountAscendingComparer('a'));
 
         // Assert
         Assert.Equal(new[] { "kiwi", "apple", "pear", "banana" }, result);
@@ -133,7 +135,7 @@ public class ArrayExtensionTests
         string[] input = { "apple", "banana", "kiwi", "pear" };
 
         // Act
-        string[] result = input.SortBy(new CharCountDescendingComparer('a'));
+        var result = input.SortBy(new CharCountDescendingComparer('a'));
 
         // Assert
         Assert.Equal(new[] { "banana", "apple", "pear", "kiwi" }, result);

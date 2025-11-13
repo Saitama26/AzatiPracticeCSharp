@@ -1,9 +1,10 @@
 ﻿using Day3.Task1_3.Interfaces;
+
 namespace Day3.Task1_3;
 
 public static partial class ArrayExtension
 {
-    public static T[] SortBy<T>(this T[] array, IComparer<T> comparer)
+    public static IEnumerable<T> SortBy<T>(this IEnumerable<T> array, IComparer<T> comparer)
     {
         if (array == null) 
         {
@@ -14,13 +15,10 @@ public static partial class ArrayExtension
             throw new ArgumentNullException($"{nameof(comparer)} can't be null"); 
         }
 
-        T[] sort = (T[])array.Clone();
-        Array.Sort(sort, comparer);
-
-        return sort;
+        return array.OrderBy(x => x, comparer);
     }
 
-    public static TResult[] Transform<TSource, TResult>(this TSource[] array, ITransformer<TSource, TResult> transformer)
+    public static IEnumerable<TResult> Transform<TSource, TResult>(this IEnumerable<TSource> array, ITransformer<TSource, TResult> transformer)
     {
         if (array == null)
         {
@@ -31,30 +29,29 @@ public static partial class ArrayExtension
             throw new ArgumentNullException($"{nameof(transformer)} can't be null");
         }
 
-        List<TResult> list = new List<TResult>();
+        var result = new List<TResult>();
 
         foreach (var item in array)
-            list.Add(transformer.Transform(item));
+        {
+            result.Add(transformer.Transform(item));
+        }
 
-        return list.ToArray<TResult>();
+        return result;
     }
 
-    public static T[] Filter<T>(this T[] array, IPredicate<T> predicate)
+    public static IEnumerable<T> Filter<T>(this IEnumerable<T> array, IPredicate<T> predicate)
     {
         if (array == null)
-        {
-            throw new ArgumentNullException($"{nameof(array)} can't be null");
-        }
+            throw new ArgumentNullException(nameof(array));
         if (predicate == null)
+            throw new ArgumentNullException(nameof(predicate));
+
+        var result = new List<T>();
+        foreach (var item in array)
         {
-            throw new ArgumentNullException($"{nameof(predicate)} can't be null");
+            if (predicate.IsMatched(item))
+                result.Add(item);
         }
-
-        List<T> result = new List<T>();
-
-        foreach (var i in array)
-            if (predicate.IsMatched(i)) result.Add(i);
-
-        return result.ToArray<T>();
+        return result;
     }
 }

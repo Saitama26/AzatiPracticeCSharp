@@ -1,4 +1,5 @@
 ﻿namespace Day2.Task1_2;
+
 public static partial class Transformer
 {
     /// <summary>

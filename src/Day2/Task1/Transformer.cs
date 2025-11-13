@@ -1,5 +1,7 @@
 ﻿using System.Text;
+
 namespace Day2.Task1_2;
+
 public static partial class Transformer
 {
     private static readonly Dictionary<char, string> NumberWordsEnglish = new Dictionary<char, string>

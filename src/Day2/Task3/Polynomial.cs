@@ -1,4 +1,5 @@
 ﻿namespace Day2.Task3;
+
 public class Polynomial : IEquatable<Polynomial>, ICloneable, IComparable<Polynomial>
 {
     private readonly double[] _coefficients;
@@ -28,7 +29,7 @@ public class Polynomial : IEquatable<Polynomial>, ICloneable, IComparable<Polyno
         }
 
         var MaxDegree = Math.Max(left.GetDegree, right.GetDegree);
-        double[] coefficients = new double[MaxDegree + 1];
+        var coefficients = new double[MaxDegree + 1];
 
         for (int i = 0; i <= MaxDegree; i++)
             coefficients[i] = left[i] + right[i];
@@ -48,7 +49,7 @@ public class Polynomial : IEquatable<Polynomial>, ICloneable, IComparable<Polyno
         }
 
         var MaxDegree = Math.Max(left.GetDegree, right.GetDegree);
-        double[] coefficients = new double[MaxDegree + 1];
+        var coefficients = new double[MaxDegree + 1];
 
         for (int i = 0; i <= MaxDegree; i++)
             coefficients[i] = left[i] - right[i];
@@ -67,7 +68,7 @@ public class Polynomial : IEquatable<Polynomial>, ICloneable, IComparable<Polyno
             throw new ArgumentNullException($"{nameof(right)} cant be null");
         }
 
-        double[] coefficients = new double[left.GetDegree + right.GetDegree + 1];
+        var coefficients = new double[left.GetDegree + right.GetDegree + 1];
 
         for (int i = 0; i <= left.GetDegree; i++)
         {
@@ -95,15 +96,14 @@ public class Polynomial : IEquatable<Polynomial>, ICloneable, IComparable<Polyno
 
     public override bool Equals(object? obj)
     {
-        return Equals(obj as Polynomial);
-        
+        return Equals(obj as Polynomial);   
     }
 
     public override int GetHashCode()
     {
         unchecked
         {
-            int hash = 17;
+            var hash = 17;
             foreach (var c in _coefficients)
                 hash = hash * 31 + c.GetHashCode();
             return hash;
@@ -136,7 +136,7 @@ public class Polynomial : IEquatable<Polynomial>, ICloneable, IComparable<Polyno
         
         if (_coefficients.Length - 1 != other.GetDegree) return false;
 
-        for (int i = 0; i <= other.GetDegree; i++)
+        for (var i = 0; i <= other.GetDegree; i++)
         {
             if (this[i] != other[i])
                 return false;

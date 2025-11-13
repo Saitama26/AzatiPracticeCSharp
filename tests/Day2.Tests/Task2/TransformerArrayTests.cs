@@ -1,5 +1,7 @@
 ﻿using Day2.Task1_2;
+
 namespace Day2.Tests.Task2;
+
 public class TransformerArrayTests
 {
     [Theory]
@@ -34,7 +36,7 @@ public class TransformerArrayTests
     public void GetStringRepresentation_EmptyArray_ThrowsArgumentException_WhenArrayIsEmpty()
     {
         // Arrange
-        double[] numbers = Array.Empty<double>();
+        var numbers = Array.Empty<double>();
 
         // Act & Assert
         Assert.Throws<ArgumentException>(() => numbers.GetStringRepresentation());

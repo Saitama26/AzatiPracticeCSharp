@@ -1,5 +1,7 @@
 using Day2.Task1_2;
+
 namespace Day2.Tests.Task1;
+
 public class TransformerTests
 {
     [Theory]
