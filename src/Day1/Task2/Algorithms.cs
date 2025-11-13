@@ -23,10 +23,10 @@ public static partial class Algorithms
             throw new ArgumentException($"{nameof(number)} can't be negative");
         }
         
-        char[] chars = number.ToString().ToCharArray();
+        var chars = number.ToString().ToCharArray();
 
-        int i = chars.Length - 2;
-        int j = chars.Length - 1;
+        var i = chars.Length - 2;
+        var j = chars.Length - 1;
         while (i >= 0)
         {
             if (chars[i] < chars[i + 1])

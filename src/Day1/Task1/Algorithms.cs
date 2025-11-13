@@ -38,9 +38,9 @@ public static partial class Algorithms
             throw new ArgumentException("Cannot compute even root of a negative number", nameof(value));
 
 
-        double x = value > 1 ? value : 1;
+        var x = value > 1 ? value : 1;
         double prev = 0;
-        double eps = Math.Pow(10, -accuracy);
+        var eps = Math.Pow(10, -accuracy);
 
         do
         {

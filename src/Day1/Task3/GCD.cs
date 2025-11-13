@@ -100,8 +100,8 @@ public static class GCD
 
     private static int GetGcdEuclidean(int a, int b)
     {
-        long x = Math.Abs((long)a);
-        long y = Math.Abs((long)b);
+        var x = Math.Abs((long)a);
+        var y = Math.Abs((long)b);
 
         while (x != 0 && y != 0)
         {
@@ -116,15 +116,15 @@ public static class GCD
 
     private static int GetGcdStein(int val1, int val2)
     {
-        long a = Math.Abs((long)val1);
-        long b = Math.Abs((long)val2);
+        var a = Math.Abs((long)val1);
+        var b = Math.Abs((long)val2);
 
         if (a == 0) return (int)b;
         if (b == 0) return (int)a;
         if (a == b) return (int)a;
 
-        bool aIsEven = (a & 1L) == 0;
-        bool bIsEven = (b & 1L) == 0;
+        var aIsEven = (a & 1L) == 0;
+        var bIsEven = (b & 1L) == 0;
 
         if (aIsEven && bIsEven)
             return GetGcdStein((int)(a >> 1), (int)(b >> 1)) << 1;
