@@ -65,6 +65,6 @@ public static partial class Algorithm
         if (c >= 'a' && c <= 'f')
             return 10 + (c - 'a');
 
-        throw new ArgumentException($"Недопустимый символ '{c}' в числе.");
+        throw new ArgumentException($"invalid character '{nameof(c)}' in a number.");
     }
 }
