@@ -8,5 +8,5 @@ public enum BookTag
     Price,
     Publishing,
     Title,
-    Year,
+    Year
 }
