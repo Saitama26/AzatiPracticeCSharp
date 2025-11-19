@@ -1,4 +1,5 @@
 ﻿using Day6.Task2;
+using Day6.Tests.Task2.TestData;
 
 namespace Day6.Tests.Task2;
 
@@ -89,5 +90,64 @@ public class BinarySearchTreeTests
 
         // Assert
         Assert.Equal(new[] { 8, 5, 3 }, result);
+    }
+
+    [Fact]
+    public void InOrder_String_DefaultComparer_ReturnsSorted()
+    {
+        // Arrange
+        var bst = new BinarySearchTree<string>();
+        bst.Insert("pear");
+        bst.Insert("apple");
+        bst.Insert("orange");
+
+        // Act
+        var result = bst.InOrder().ToList();
+
+        // Assert
+        Assert.Equal(new[] { "apple", "orange", "pear" }, result);
+    }
+
+    [Fact]
+    public void InOrder_String_CustomComparer_ReverseOrder()
+    {
+        // Arrange
+        var bst = new BinarySearchTree<string>(Comparer<string>.Create((a, b) => b.CompareTo(a)));
+        bst.Insert("pear");
+        bst.Insert("apple");
+        bst.Insert("orange");
+
+        // Act
+        var result = bst.InOrder().ToList();
+
+        // Assert
+        Assert.Equal(new[] { "pear", "orange", "apple" }, result);
+    }
+
+    [Fact]
+    public void InOrder_Point_CustomComparer_SortedByXThenY()
+    {
+        // Arrange
+        var bst = new BinarySearchTree<Point>(
+            Comparer<Point>.Create((a, b) =>
+            {
+                var cmp = a.X.CompareTo(b.X);
+                return cmp != 0 ? cmp : a.Y.CompareTo(b.Y);
+            })
+        );
+
+        bst.Insert(new Point { X = 2, Y = 5 });
+        bst.Insert(new Point { X = 1, Y = 3 });
+        bst.Insert(new Point { X = 2, Y = 1 });
+
+        // Act
+        var result = bst.InOrder().ToList();
+
+        // Assert
+        Assert.Equal(new List<Point>() {
+                new Point { X = 1, Y = 3 },
+                new Point { X = 2, Y = 1 },
+                new Point { X = 2, Y = 5 }
+            }, result);
     }
 }
