@@ -29,11 +29,11 @@ public class BinarySearchTree<T>
             return new Node<T>(Data);
         }
 
-        if (_comparer.Compare(root.Data, Data) < 0)
+        if (_comparer.Compare(Data, root.Data) < 0)
         {
             root.Left = InsertRec(root.Left, Data);
         }
-        else if (_comparer.Compare(root.Data, Data) > 0)
+        else if (_comparer.Compare(Data, root.Data) > 0)
         {
             root.Right = InsertRec(root.Right, Data);
         }
@@ -53,7 +53,7 @@ public class BinarySearchTree<T>
 
     private IEnumerable<T> InOrder(Node<T> root)
     {
-        if(root != null)
+        if(root != null)    
         {
             foreach(var node in InOrder(root.Left)) yield return node;
             yield return root.Data;
