@@ -19,11 +19,22 @@ public class Book : IEquatable<Book>, IComparable<Book>
         set => _IsbnValidator = value ?? throw new ArgumentNullException($"{nameof(value)} can't be null");
     }
 
-    public Book() { }
-
-    public Book(IIsbnValidator isbnValidator)
+    public Book() 
     {
-        _IsbnValidator = isbnValidator ?? throw new ArgumentNullException($"{nameof(isbnValidator)} can't be null");
+        _IsbnValidator = new DefaultIsbnValidator();
+    }
+
+    public Book(string isbn, string author, string title, string publishing,
+    int yearOfPublication, int pagesCount, double price, IIsbnValidator isbnValidator)
+    {
+        _IsbnValidator = isbnValidator ?? new DefaultIsbnValidator();
+        ISBN = isbn;
+        Author = author;
+        Title = title;
+        Publishing = publishing;
+        YearOfPublication = yearOfPublication;
+        PagesCount = pagesCount;
+        Price = price;
     }
 
     public int CompareTo(Book? other)

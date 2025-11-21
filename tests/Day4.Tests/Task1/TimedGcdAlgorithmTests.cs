@@ -18,7 +18,7 @@ public class TimedGcdAlgorithmTests : IClassFixture<GcdFixture>, IClassFixture<T
     public void Constructor_NullAlgorithm_ThrowsArgumentNullException_WhenAlgorithmIsNull()
     {
         // Act & Assert
-        Assert.Throws<ArgumentNullException>(() => new TimedGcdAlgorithm(null, _timeFixture.consoleMeasurer));
+        Assert.Throws<ArgumentNullException>(() => new TimedGcdAlgorithm(null, _timeFixture.ConsoleMeasurer));
     }
 
     [Fact]
@@ -32,7 +32,7 @@ public class TimedGcdAlgorithmTests : IClassFixture<GcdFixture>, IClassFixture<T
     public void Calculate_UsesEuclideanAlgorithm_ReturnsCorrectResult()
     {
         // Arrange
-        var timedAlgorithm = new TimedGcdAlgorithm(_gcdFixture.Euclidean, _timeFixture.consoleMeasurer);
+        var timedAlgorithm = new TimedGcdAlgorithm(_gcdFixture.Euclidean, _timeFixture.ConsoleMeasurer);
 
         // Act
         var result = timedAlgorithm.Calculate(252, 105);
@@ -45,7 +45,7 @@ public class TimedGcdAlgorithmTests : IClassFixture<GcdFixture>, IClassFixture<T
     public void Calculate_UsesBinaryAlgorithm_ReturnsCorrectResult()
     {
         // Arrange
-        var timedAlgorithm = new TimedGcdAlgorithm(_gcdFixture.Binary, _timeFixture.consoleMeasurer);
+        var timedAlgorithm = new TimedGcdAlgorithm(_gcdFixture.Binary, _timeFixture.ConsoleMeasurer);
 
         // Act
         var result = timedAlgorithm.Calculate(252, 105);
@@ -58,14 +58,17 @@ public class TimedGcdAlgorithmTests : IClassFixture<GcdFixture>, IClassFixture<T
     public void Calculate_LogsExecutionTimeToFile()
     {
         // Arrange
-        var timedAlgorithm = new TimedGcdAlgorithm(_gcdFixture.Euclidean, _timeFixture.fileMeasurer);
+        var timedAlgorithm = new TimedGcdAlgorithm(_gcdFixture.Euclidean, _timeFixture.FileMeasurer);
 
         // Act
         var result = timedAlgorithm.Calculate(252, 105);
 
         // Assert
         Assert.Equal(21, result);
+        Assert.True(File.Exists(_timeFixture.LogFilePath));
 
-        Assert.True(File.Exists("D:\\log.txt"));
+        // Verify log file contains timing information
+        var logContent = File.ReadAllText(_timeFixture.LogFilePath);
+        Assert.False(string.IsNullOrWhiteSpace(logContent), "Log file should contain timing information");
     }
 }
