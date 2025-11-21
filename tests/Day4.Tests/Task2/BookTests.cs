@@ -14,20 +14,30 @@ public class BookTests : IClassFixture<BookFixture>
         _fixture = fixture;
     }
 
+    /// <summary>
+    /// Helper method to create a mock ISBN validator with specified return value.
+    /// </summary>
+    private Mock<IIsbnValidator> CreateMockValidator(string isbn, bool isValid)
+    {
+        var mockValidator = new Mock<IIsbnValidator>();
+        mockValidator.Setup(v => v.Validate(isbn)).Returns(isValid);
+        return mockValidator;
+    }
+
     [Fact]
     public void Validate_ReturnsTrue_WhenValidatorApproves()
     {
         // Arrange
         var book = _fixture.ValidBook;
-        var mockValidator = new Mock<IIsbnValidator>();
+        var mockValidator = CreateMockValidator(book.ISBN, true);
         book.IsbnValidator = mockValidator.Object;
-        mockValidator.Setup(x => x.Validate(book.ISBN)).Returns(true);
 
         // Act
         var result = book.Validate();
 
         // Assert
         Assert.True(result);
+        mockValidator.Verify(v => v.Validate(book.ISBN), Times.Once);
     }
 
     [Fact]
@@ -35,15 +45,15 @@ public class BookTests : IClassFixture<BookFixture>
     {
         // Arrange
         var book = _fixture.ValidBook;
-        var mockValidator = new Mock<IIsbnValidator>();
+        var mockValidator = CreateMockValidator(book.ISBN, false);
         book.IsbnValidator = mockValidator.Object;
-        mockValidator.Setup(v => v.Validate(book.ISBN)).Returns(false);
 
         // Act
         var result = book.Validate();
 
         // Assert
         Assert.False(result);
+        mockValidator.Verify(v => v.Validate(book.ISBN), Times.Once);
     }
 
     [Fact]
