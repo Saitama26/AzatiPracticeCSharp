@@ -1,6 +1,6 @@
 ﻿namespace Day5.Task1;
 
-public static partial class Algorithm
+public static partial class Algorithms
 {
     public static IEnumerable<int> ParseString(IEnumerable<string> inputs, int numberDegree)
     {

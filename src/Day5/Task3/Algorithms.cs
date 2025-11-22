@@ -1,6 +1,6 @@
 ﻿namespace Day5.Task3;
 
-public static partial class Algorithm
+public static partial class Algorithms
 {
     public static bool ValidateBrackets(string value)
     {

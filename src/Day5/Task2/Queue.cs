@@ -2,12 +2,12 @@
 
 namespace Day5.Task2;
 
-public class Queuee<T> : IEnumerable<T>
+public class Queue<T> : IEnumerable<T>
 {
     private readonly List<T> _queue;
     public int Count { get => _queue.Count; }
 
-    public Queuee()
+    public Queue()
     {
         _queue = new List<T>();
     }

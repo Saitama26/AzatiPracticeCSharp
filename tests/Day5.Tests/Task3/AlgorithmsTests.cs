@@ -2,7 +2,7 @@
 
 namespace Day5.Tests.Task3;
 
-public partial class AlgorithmTests
+public partial class AlgorithmsTests
 {
     [Theory]
     [InlineData("()", true)]
@@ -13,7 +13,7 @@ public partial class AlgorithmTests
     public void ValidateBrackets_CorrectSequences_ReturnsTrue(string input, bool expected)
     {
         // Act
-        var result = Algorithm.ValidateBrackets(input);
+        var result = Algorithms.ValidateBrackets(input);
 
         // Assert
         Assert.Equal(expected, result);
@@ -26,7 +26,7 @@ public partial class AlgorithmTests
         string input = "";
 
         // Act & Assert
-        Assert.Throws<ArgumentNullException>(() => Algorithm.ValidateBrackets(input));
+        Assert.Throws<ArgumentNullException>(() => Algorithms.ValidateBrackets(input));
     }
 
     [Fact]
@@ -36,7 +36,7 @@ public partial class AlgorithmTests
         string input = "([)]";
 
         // Act
-        var result = Algorithm.ValidateBrackets(input);
+        var result = Algorithms.ValidateBrackets(input);
 
         // Assert
         Assert.False(result);
@@ -49,7 +49,7 @@ public partial class AlgorithmTests
         string input = "(((";
 
         // Act
-        var result = Algorithm.ValidateBrackets(input);
+        var result = Algorithms.ValidateBrackets(input);
 
         // Assert
         Assert.False(result);
@@ -62,7 +62,7 @@ public partial class AlgorithmTests
         string input = "())";
 
         // Act
-        var result = Algorithm.ValidateBrackets(input);
+        var result = Algorithms.ValidateBrackets(input);
 
         // Assert
         Assert.False(result);

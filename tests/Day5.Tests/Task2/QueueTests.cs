@@ -1,4 +1,5 @@
-﻿using Day5.Task2;
+﻿using QueueString = Day5.Task2.Queue<string>;
+using QueueInt = Day5.Task2.Queue<int>;
 
 namespace Day5.Tests.Task2;
 
@@ -8,7 +9,7 @@ public class QueueTests
     public void Enqueue_AddsItems_IncreasesCount()
     {
         // Arrange
-        var queue = new Queuee<int>();
+        var queue = new QueueInt();
 
         // Act
         queue.Enqueue(1);
@@ -24,7 +25,7 @@ public class QueueTests
     public void Dequeue_RemovesAndReturnsFirstElement()
     {
         // Arrange
-        var queue = new Queuee<string>();
+        var queue = new QueueString();
         queue.Enqueue("first");
         queue.Enqueue("second");
 
@@ -41,7 +42,7 @@ public class QueueTests
     public void Dequeue_EmptyQueue_ThrowsInvalidOperationException()
     {
         // Arrange
-        var queue = new Queuee<int>();
+        var queue = new QueueInt();
 
         // Act & Assert
         Assert.Throws<InvalidOperationException>(() => queue.Dequeue());
@@ -51,7 +52,7 @@ public class QueueTests
     public void Peek_ReturnsFirstElementWithoutRemoving()
     {
         // Arrange
-        var queue = new Queuee<int>();
+        var queue = new QueueInt();
         queue.Enqueue(10);
         queue.Enqueue(20);
 
@@ -67,7 +68,7 @@ public class QueueTests
     public void Peek_EmptyQueue_ThrowsInvalidOperationException()
     {
         // Arrange
-        var queue = new Queuee<int>();
+        var queue = new QueueInt();
 
         // Act & Assert
         Assert.Throws<InvalidOperationException>(() => queue.Peek());
@@ -77,7 +78,7 @@ public class QueueTests
     public void Contains_ReturnsTrueIfElementExists()
     {
         // Arrange
-        var queue = new Queuee<int>();
+        var queue = new QueueInt();
         queue.Enqueue(5);
 
         // Act & Assert
@@ -89,7 +90,7 @@ public class QueueTests
     public void Clear_RemovesAllElements()
     {
         // Arrange
-        var queue = new Queuee<int>();
+        var queue = new QueueInt();
         queue.Enqueue(1);
         queue.Enqueue(2);
 
@@ -105,7 +106,7 @@ public class QueueTests
     public void GetEnumerator_IteratesOverElementsInOrder()
     {
         // Arrange
-        var queue = new Queuee<int>();
+        var queue = new QueueInt();
         queue.Enqueue(1);
         queue.Enqueue(2);
         queue.Enqueue(3);

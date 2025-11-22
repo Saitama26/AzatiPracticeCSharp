@@ -2,7 +2,7 @@
 
 namespace Day5.Tests.Task1;
 
-public partial class AlgorithmTests
+public partial class AlgorithmsTests
 {
     [Theory]
     [InlineData(new[] { "101", "1110", "-10" }, 2, new[] { 5, 14, -2 })]
@@ -17,7 +17,7 @@ public partial class AlgorithmTests
     public void ParseString_WorksCorrectly(string[] inputs, int baseSystem, int[] expected)
     {
         // Act
-        var result = Algorithm.ParseString(inputs, baseSystem);
+        var result = Algorithms.ParseString(inputs, baseSystem);
 
         //Assert
         Assert.Equal(expected, result);
@@ -30,7 +30,7 @@ public partial class AlgorithmTests
         IEnumerable<string> inputs = null;
 
         // Act & Assert
-        Assert.Throws<ArgumentNullException>(() => Algorithm.ParseString(inputs, 10));
+        Assert.Throws<ArgumentNullException>(() => Algorithms.ParseString(inputs, 10));
     }
 
     [Fact]
@@ -40,8 +40,8 @@ public partial class AlgorithmTests
         var inputs = new[] { "10" };
 
         // Act & Assert
-        Assert.Throws<ArgumentOutOfRangeException>(() => Algorithm.ParseString(inputs, 1));
-        Assert.Throws<ArgumentOutOfRangeException>(() => Algorithm.ParseString(inputs, 17));
+        Assert.Throws<ArgumentOutOfRangeException>(() => Algorithms.ParseString(inputs, 1));
+        Assert.Throws<ArgumentOutOfRangeException>(() => Algorithms.ParseString(inputs, 17));
     }
 
     [Fact]
@@ -51,7 +51,7 @@ public partial class AlgorithmTests
         var inputs = new[] { "" };
 
         // Act & Assert
-        Assert.Throws<ArgumentException>(() => Algorithm.ParseString(inputs, 10));
+        Assert.Throws<ArgumentException>(() => Algorithms.ParseString(inputs, 10));
     }
 
     [Fact]
@@ -61,6 +61,6 @@ public partial class AlgorithmTests
         var inputs = new[] { "9" };
 
         // Act & Assert
-        Assert.Throws<ArgumentException>(() => Algorithm.ParseString(inputs, 8));
+        Assert.Throws<ArgumentException>(() => Algorithms.ParseString(inputs, 8));
     }
 }
