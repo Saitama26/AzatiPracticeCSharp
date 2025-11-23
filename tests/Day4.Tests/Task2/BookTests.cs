@@ -1,6 +1,7 @@
 ﻿using Day4.Task2.Implementations;
 using Day4.Task2.Interfaces;
 using Day4.Tests.Task2.Fixtures;
+using Day4.Task2.Models;
 using Moq;
 
 namespace Day4.Tests.Task2;
@@ -21,6 +22,15 @@ public class BookTests : IClassFixture<BookFixture>
     {
         var mockValidator = new Mock<IIsbnValidator>();
         mockValidator.Setup(v => v.Validate(isbn)).Returns(isValid);
+
+        return mockValidator;
+    }
+
+    private Mock<ICustomIsbnValidator> CreateCustomMockValidator(string isbn, bool isValid)
+    {
+        var mockValidator = new Mock<ICustomIsbnValidator>();
+        mockValidator.Setup(v => v.Validate(It.IsAny<ISBNModel>())).Returns(isValid);
+
         return mockValidator;
     }
 
@@ -175,5 +185,71 @@ public class BookTests : IClassFixture<BookFixture>
 
         // Assert
         Assert.Equal(0, hash);
+    }
+
+    [Fact]
+    public void Validate_ReturnsTrue_WithDefaultValidator_WhenIsbnIsValid()
+    {
+        // Arrange
+        var book = _fixture.ValidBook;
+
+        // Act
+        var result = book.Validate();
+
+        // Assert
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void Validate_ReturnsFalse_WithDefaultValidator_WhenIsbnIsInvalid()
+    {
+        // Arrange
+        var book = _fixture.InvalidBook;
+
+        // Act
+        var result = book.Validate();
+
+        // Assert
+        Assert.False(result);
+    }
+
+    [Fact]
+    public void Validate_ReturnsTrue_WithCustomValidatorAdapter_WhenIsbnIsValid()
+    {
+        // Arrange
+        var book = _fixture.ValidBook;
+        var mockValidator = CreateCustomMockValidator(book.ISBN, true);
+        var customValidator = new CustomIsbnValidatorAdapter(mockValidator.Object);
+
+        // Act
+        var result = book.Validate();
+
+        // Assert
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void Validate_ReturnsFalse_WithCustomValidatorAdapter_WhenIsbnIsInvalid()
+    {
+        // Arrange
+        var book = _fixture.InvalidBook;
+        var mockValidator = CreateCustomMockValidator(book.ISBN, false);
+        var customValidator = new CustomIsbnValidatorAdapter(mockValidator.Object);
+
+        // Act
+        var result = book.Validate();
+
+        // Assert
+        Assert.False(result);
+    }
+
+    [Fact]
+    public void IsbnValidator_Setter_ThrowsArgumentNullException_WhenNull()
+    {
+        // Arrange
+        var book = _fixture.ValidBook;
+
+        // Act & Assert
+        Assert.Throws<ArgumentNullException>(() => book.IsbnValidator = null);
     }
 }

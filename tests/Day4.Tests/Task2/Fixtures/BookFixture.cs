@@ -6,6 +6,7 @@ public class BookFixture
 {
     public Book ValidBook { get; }
     public Book AnotherBook { get; }
+    public Book InvalidBook { get; }
 
     public BookFixture()
     {
@@ -29,6 +30,17 @@ public class BookFixture
             YearOfPublication = 2021,
             PagesCount = 200,
             Price = 19.99
+        };
+
+        InvalidBook = new Book()
+        {
+            ISBN = "BAD_ISBN",
+            Author = "Author",
+            Title = "Title",
+            Publishing = "Pub",
+            YearOfPublication = 2025,
+            PagesCount = 300,
+            Price = 49.99
         };
     }
 }
