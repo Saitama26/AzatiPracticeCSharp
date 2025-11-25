@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/Day5.Tests/">
+    <Project Path="../Day5.Tests/Day5.Tests.csproj" />
+  </Folder>
+  <Project Path="Day5.csproj" />
+</Solution>

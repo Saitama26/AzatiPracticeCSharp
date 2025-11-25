@@ -1,0 +1,153 @@
+﻿using QueueString = Day5.Task2.Queue<string>;
+using QueueInt = Day5.Task2.Queue<int>;
+
+namespace Day5.Tests.Task2;
+
+public class QueueTests
+{
+    [Fact]
+    public void Enqueue_AddsItems_IncreasesCount()
+    {
+        var queue = new QueueInt();
+        queue.Enqueue(1);
+        queue.Enqueue(2);
+
+        Assert.Equal(2, queue.Count);
+        Assert.True(queue.Contains(1));
+        Assert.True(queue.Contains(2));
+    }
+
+    [Fact]
+    public void Dequeue_RemovesAndReturnsFirstElement()
+    {
+        var queue = new QueueString();
+        queue.Enqueue("first");
+        queue.Enqueue("second");
+
+        var result = queue.Dequeue();
+
+        Assert.Equal("first", result);
+        Assert.Equal(1, queue.Count);
+        Assert.False(queue.Contains("first"));
+    }
+
+    [Fact]
+    public void Dequeue_EmptyQueue_ThrowsInvalidOperationException()
+    {
+        var queue = new QueueInt();
+        Assert.Throws<InvalidOperationException>(() => queue.Dequeue());
+    }
+
+    [Fact]
+    public void Peek_ReturnsFirstElementWithoutRemoving()
+    {
+        var queue = new QueueInt();
+        queue.Enqueue(10);
+        queue.Enqueue(20);
+
+        var result = queue.Peek();
+
+        Assert.Equal(10, result);
+        Assert.Equal(2, queue.Count);
+    }
+
+    [Fact]
+    public void Peek_EmptyQueue_ThrowsInvalidOperationException()
+    {
+        var queue = new QueueInt();
+        Assert.Throws<InvalidOperationException>(() => queue.Peek());
+    }
+
+    [Fact]
+    public void Contains_ReturnsTrueIfElementExists()
+    {
+        var queue = new QueueInt();
+        queue.Enqueue(5);
+
+        Assert.True(queue.Contains(5));
+        Assert.False(queue.Contains(10));
+    }
+
+    [Fact]
+    public void Clear_RemovesAllElements()
+    {
+        var queue = new QueueInt();
+        queue.Enqueue(1);
+
+        queue.Clear();
+
+        Assert.Equal(0, queue.Count);
+        Assert.False(queue.Contains(1));
+    }
+
+    [Fact]
+    public void GetEnumerator_IteratesOverElementsInOrder()
+    {
+        var queue = new QueueInt();
+        queue.Enqueue(1);
+        queue.Enqueue(2);
+        queue.Enqueue(3);
+
+        var items = queue.ToList();
+
+        Assert.Equal(new[] { 1, 2, 3 }, items);
+    }
+
+    [Fact]
+    public void Foreach_IteratesElementsCorrectly()
+    {
+        var queue = new QueueInt();
+        queue.Enqueue(1);
+        queue.Enqueue(2);
+        queue.Enqueue(3);
+
+        var result = new List<int>();
+        foreach (var item in queue)
+        {
+            result.Add(item);
+        }
+
+        Assert.Equal(new[] { 1, 2, 3 }, result);
+    }
+
+    [Fact]
+    public void Enumerator_Reset_AllowsReiteration()
+    {
+        var queue = new QueueInt();
+        queue.Enqueue(1);
+        queue.Enqueue(2);
+
+        using var enumerator = queue.GetEnumerator();
+        Assert.True(enumerator.MoveNext());
+        Assert.Equal(1, enumerator.Current);
+
+        enumerator.Reset();
+        Assert.True(enumerator.MoveNext());
+        Assert.Equal(1, enumerator.Current);
+    }
+
+    [Fact]
+    public void Enumerator_ThrowsInvalidOperation_WhenCollectionModified()
+    {
+        var queue = new QueueInt();
+        queue.Enqueue(1);
+        queue.Enqueue(2);
+
+        using var enumerator = queue.GetEnumerator();
+        Assert.True(enumerator.MoveNext());
+
+        queue.Enqueue(3);
+
+        Assert.Throws<InvalidOperationException>(() => enumerator.MoveNext());
+    }
+
+    [Fact]
+    public void Enumerator_Dispose_DoesNotThrow()
+    {
+        var queue = new QueueInt();
+        queue.Enqueue(1);
+
+        using var enumerator = queue.GetEnumerator();
+        enumerator.Dispose();
+    }
+}
