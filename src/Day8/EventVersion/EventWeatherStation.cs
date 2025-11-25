@@ -2,7 +2,7 @@
 
 namespace Day8.EventVersion;
 
-public class EventWeatherData
+public class EventWeatherStation
 {
     public event EventHandler<WeatherInfoEventArgs>? WeatherChanged;
 

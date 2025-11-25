@@ -4,7 +4,7 @@ namespace Day8.EventVersion;
 
 public class EventCurrentConditionsReport
 {
-    public void Subscribe(EventWeatherData data)
+    public void Subscribe(EventWeatherStation data)
     {
         data.WeatherChanged += Update;
     }

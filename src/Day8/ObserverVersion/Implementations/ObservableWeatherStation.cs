@@ -3,12 +3,12 @@ using Day8.ObserverVersion.Interfaces;
 
 namespace Day8.ObserverVersion.Implementations;
 
-public class ObservableWeatherData : IObservable
+public class ObservableWeatherStation : IObservable
 {
     private readonly List<IObserver> _observers;
     private WeatherInfoEventArgs _weatherData;
 
-    public ObservableWeatherData()
+    public ObservableWeatherStation()
     {
         _observers = new();
     }

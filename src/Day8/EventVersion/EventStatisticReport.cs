@@ -5,7 +5,7 @@ public class EventStatisticReport
 {
     private readonly List<float> _temperatures = new();
 
-    public void Subscribe(EventWeatherData data)
+    public void Subscribe(EventWeatherStation data)
     {
         data.WeatherChanged += Update;
     }
