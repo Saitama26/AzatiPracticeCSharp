@@ -2,7 +2,7 @@
 
 namespace Day5.Task2
 {
-    public class Queue<T> : IEnumerable<T>
+    public class Queue<T> : IEnumerable<T>, IEnumerable
     {
         private readonly List<T> _queue;
         private int _version; 
@@ -53,7 +53,7 @@ namespace Day5.Task2
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        private class QueueEnumerator : IEnumerator<T>
+        private class QueueEnumerator : IEnumerator<T>, IEnumerator
         {
             private readonly Queue<T> _queue;
             private readonly int _version;
