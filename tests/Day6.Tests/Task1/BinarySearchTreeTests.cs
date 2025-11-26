@@ -1,5 +1,5 @@
 ﻿using Day6.Task1;
-using Day6.Tests.Task1.TestData;
+using Day6.Tests.Task1;
 using Day4.Task2.Implementations;
 
 namespace Day6.Tests.Task1;
