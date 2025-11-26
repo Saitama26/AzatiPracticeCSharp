@@ -1,4 +1,4 @@
-﻿namespace Day6.Tests.Task1.TestData;
+﻿namespace Day6.Tests.Task1;
 
 public struct Point
 {
