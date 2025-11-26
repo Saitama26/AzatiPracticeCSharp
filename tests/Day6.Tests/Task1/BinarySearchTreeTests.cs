@@ -15,9 +15,9 @@ public class BinarySearchTreeTests
         bst.Add(8);
 
         Assert.Equal(3, bst.Count);
-        Assert.True(bst.Contains(5));
-        Assert.True(bst.Contains(3));
-        Assert.True(bst.Contains(8));
+        Assert.Contains(5, bst);
+        Assert.Contains(3, bst);
+        Assert.Contains(8, bst);
     }
 
     [Fact]
@@ -100,9 +100,9 @@ public class BinarySearchTreeTests
         var removed = bst.Remove(7);
 
         Assert.True(removed);
+        Assert.Contains(6, bst);
+        Assert.Contains(8, bst);
         Assert.False(bst.Contains(7));
-        Assert.True(bst.Contains(6));
-        Assert.True(bst.Contains(8));
     }
 
     [Fact]
