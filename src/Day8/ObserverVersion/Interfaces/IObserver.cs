@@ -1,8 +1,8 @@
-﻿using Day8.Helpers;
+﻿using Day8.ObserverVersion.Implementations;
 
 namespace Day8.ObserverVersion.Interfaces;
 
 public interface IObserver
 {
-    void Update(WeatherInfoEventArgs weatherInfo);
+    void Update(WeatherInfo weatherInfo);
 }

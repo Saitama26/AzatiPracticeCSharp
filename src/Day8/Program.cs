@@ -1,5 +1,6 @@
-﻿using Day8.EventVersion;
-using Day8.ObserverVersion.Implementations;
+﻿using Day8.ObserverVersion.Implementations;
+using Day8.EventVersion.BusinessLogic;
+using Day8.EventVersion.DataModels;
 
 namespace Day8;
 
@@ -7,32 +8,44 @@ public class Program
 {
     static void Main()
     {
-        // Event pattern
-        var eventWeatherStation = new EventWeatherStation();
-
-        var currentReport = new EventCurrentConditionsReport();
-        var statisticReport = new EventStatisticReport();
-
-        currentReport.Subscribe(eventWeatherStation);
-        statisticReport.Subscribe(eventWeatherStation);
+        // Event version
+        var eventWeatherData = new EventWeatherData();
+        var eventStation = new EventWeatherStation(eventWeatherData);
 
         // simulating data entry
-        eventWeatherStation.UpdateData(-15, 25, 1112);
-        eventWeatherStation.UpdateData(-1, 35, 1060);
-        eventWeatherStation.UpdateData(5, 50, 1015);
+        eventWeatherData.Temperature = 10;
+        eventWeatherData.Humidity = 35;
+        eventWeatherData.Pressure = 1100;
 
-        // Observer pattern
-        var observableWeatherStation = new ObservableWeatherStation();
+        Console.WriteLine(eventStation.WeatherReport.ToString());
 
-        var observerCurrentReport = new ObserverCurrentConditionsReport();
-        var observerStatisticReport = new ObserverStatisticReport();
+        eventWeatherData.Temperature = 35;
+        eventWeatherData.Humidity = 70;
+        eventWeatherData.Pressure = 1199;
 
-        observableWeatherStation.AddObserver(observerCurrentReport);
-        observableWeatherStation.AddObserver(observerStatisticReport);
+        Console.WriteLine(eventStation.WeatherReport.ToString());
+
+        var eventReport = eventStation.GetStatisticReport(DateTime.Now.AddMinutes(-10), DateTime.Now);
+        Console.WriteLine(eventReport.ToString());
+
+        // Obverver pattern
+        var weatherData = new ObserverWeatherData();
+        var station = new ObserverWeatherStation(weatherData);
 
         // simulating data entry
-        observableWeatherStation.UpdateData(20, 50, 1012);
-        observableWeatherStation.UpdateData(33, 60, 960);
-        observableWeatherStation.UpdateData(40, 80, 915);
+        weatherData.Temperature = 20;
+        weatherData.Humidity = 65;
+        weatherData.Pressure = 1012;
+
+        Console.WriteLine(station.WeatherReport.ToString());
+
+        weatherData.Temperature = 22;
+        weatherData.Humidity = 70;
+        weatherData.Pressure = 1010;
+
+        Console.WriteLine(station.WeatherReport.ToString());
+
+        var report = station.GetStatisticReport(DateTime.Now.AddMinutes(-10), DateTime.Now);
+        Console.WriteLine(report.ToString());
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Day8.Helpers;
+﻿namespace Day8.EventVersion.DataModels;
 
 public class WeatherInfoEventArgs
 {
