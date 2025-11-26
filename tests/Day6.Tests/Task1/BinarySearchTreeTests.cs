@@ -6,6 +6,138 @@ namespace Day6.Tests.Task1;
 
 public class BinarySearchTreeTests
 {
+    [Fact]
+    public void Add_IncreasesCount_AndContainsElement()
+    {
+        var bst = new BinarySearchTree<int>();
+        bst.Add(5);
+        bst.Add(3);
+        bst.Add(8);
+
+        Assert.Equal(3, bst.Count);
+        Assert.True(bst.Contains(5));
+        Assert.True(bst.Contains(3));
+        Assert.True(bst.Contains(8));
+    }
+
+    [Fact]
+    public void Clear_RemovesAllElements()
+    {
+        var bst = new BinarySearchTree<int>();
+        bst.Add(1);
+        bst.Add(2);
+        bst.Add(3);
+
+        bst.Clear();
+
+        Assert.Equal(0, bst.Count);
+        Assert.False(bst.Contains(1));
+    }
+
+    [Fact]
+    public void Contains_ReturnsFalse_WhenElementNotPresent()
+    {
+        var bst = new BinarySearchTree<int>();
+        bst.Add(10);
+        bst.Add(20);
+
+        Assert.False(bst.Contains(5));
+    }
+
+    [Fact]
+    public void CopyTo_CopiesElementsInOrder()
+    {
+        var bst = new BinarySearchTree<int>();
+        bst.Add(5);
+        bst.Add(3);
+        bst.Add(8);
+
+        var array = new int[3];
+        bst.CopyTo(array, 0);
+
+        Assert.Equal(new[] { 3, 5, 8 }, array);
+    }
+
+    [Fact]
+    public void Remove_RemovesLeafNode()
+    {
+        var bst = new BinarySearchTree<int>();
+        bst.Add(5);
+        bst.Add(3);
+        bst.Add(8);
+
+        var removed = bst.Remove(3);
+
+        Assert.True(removed);
+        Assert.False(bst.Contains(3));
+        Assert.Equal(2, bst.Count);
+    }
+
+    [Fact]
+    public void Remove_RemovesNodeWithOneChild()
+    {
+        var bst = new BinarySearchTree<int>();
+        bst.Add(5);
+        bst.Add(3);
+        bst.Add(2); // child of 3
+
+        var removed = bst.Remove(3);
+
+        Assert.True(removed);
+        Assert.Contains(2, bst);
+    }
+
+    [Fact]
+    public void Remove_RemovesNodeWithTwoChildren()
+    {
+        var bst = new BinarySearchTree<int>();
+        bst.Add(5);
+        bst.Add(3);
+        bst.Add(7);
+        bst.Add(6);
+        bst.Add(8);
+
+        var removed = bst.Remove(7);
+
+        Assert.True(removed);
+        Assert.False(bst.Contains(7));
+        Assert.True(bst.Contains(6));
+        Assert.True(bst.Contains(8));
+    }
+
+    [Fact]
+    public void Remove_ReturnsFalse_WhenElementNotFound()
+    {
+        var bst = new BinarySearchTree<int>();
+        bst.Add(5);
+        bst.Add(3);
+
+        var removed = bst.Remove(10);
+
+        Assert.False(removed);
+        Assert.Equal(2, bst.Count);
+    }
+
+    [Fact]
+    public void Enumerator_IteratesInOrder()
+    {
+        var bst = new BinarySearchTree<int>();
+        bst.Add(5);
+        bst.Add(3);
+        bst.Add(8);
+
+        var result = bst.ToList();
+
+        Assert.Equal(new[] { 3, 5, 8 }, result);
+    }
+
+    [Fact]
+    public void IsReadOnly_ReturnsFalse()
+    {
+        var bst = new BinarySearchTree<int>();
+        Assert.False(bst.IsReadOnly);
+    }
+
     [Theory]
     [InlineData(new[] { 5, 3, 8 }, new[] { 3, 5, 8 })]
     [InlineData(new[] { 10, 4, 15, 2 }, new[] { 2, 4, 10, 15 })]
@@ -15,7 +147,7 @@ public class BinarySearchTreeTests
         // Arrange
         var bst = new BinarySearchTree<int>();
         foreach (var value in input)
-            bst.Insert(value);
+            bst.Add(value);
 
         // Act
         var result = bst.InOrder().ToList();
@@ -33,7 +165,7 @@ public class BinarySearchTreeTests
         // Arrange
         var bst = new BinarySearchTree<int>();
         foreach (var value in input)
-            bst.Insert(value);
+            bst.Add(value);
 
         // Act
         var result = bst.PreOrder().ToList();
@@ -51,7 +183,7 @@ public class BinarySearchTreeTests
         // Arrange
         var bst = new BinarySearchTree<int>();
         foreach (var value in input)
-            bst.Insert(value);
+            bst.Add(value);
 
         // Act
         var result = bst.PostOrder().ToList();
@@ -82,9 +214,9 @@ public class BinarySearchTreeTests
     {
         // Arrange
         var bst = new BinarySearchTree<int>(Comparer<int>.Create((a, b) => b.CompareTo(a)));
-        bst.Insert(5);
-        bst.Insert(3);
-        bst.Insert(8);
+        bst.Add(5);
+        bst.Add(3);
+        bst.Add(8);
 
         // Act
         var result = bst.InOrder().ToList();
@@ -98,9 +230,9 @@ public class BinarySearchTreeTests
     {
         // Arrange
         var bst = new BinarySearchTree<string>();
-        bst.Insert("pear");
-        bst.Insert("apple");
-        bst.Insert("orange");
+        bst.Add("pear");
+        bst.Add("apple");
+        bst.Add("orange");
 
         // Act
         var result = bst.InOrder().ToList();
@@ -114,9 +246,9 @@ public class BinarySearchTreeTests
     {
         // Arrange
         var bst = new BinarySearchTree<string>(Comparer<string>.Create((a, b) => b.CompareTo(a)));
-        bst.Insert("pear");
-        bst.Insert("apple");
-        bst.Insert("orange");
+        bst.Add("pear");
+        bst.Add("apple");
+        bst.Add("orange");
 
         // Act
         var result = bst.InOrder().ToList();
@@ -137,9 +269,9 @@ public class BinarySearchTreeTests
             })
         );
 
-        bst.Insert(new Point { X = 2, Y = 5 });
-        bst.Insert(new Point { X = 1, Y = 3 });
-        bst.Insert(new Point { X = 2, Y = 1 });
+        bst.Add(new Point { X = 2, Y = 5 });
+        bst.Add(new Point { X = 1, Y = 3 });
+        bst.Add(new Point { X = 2, Y = 1 });
 
         // Act
         var result = bst.InOrder().ToList();
@@ -161,9 +293,9 @@ public class BinarySearchTreeTests
             Comparer<Point>.Create((a, b) => b.Y.CompareTo(a.Y))
         );
 
-        bst.Insert(new Point { X = 1, Y = 3 });
-        bst.Insert(new Point { X = 2, Y = 5 });
-        bst.Insert(new Point { X = 2, Y = 1 });
+        bst.Add(new Point { X = 1, Y = 3 });
+        bst.Add(new Point { X = 2, Y = 5 });
+        bst.Add(new Point { X = 2, Y = 1 });
 
         // Act
         var result = bst.InOrder().ToList();
@@ -187,9 +319,9 @@ public class BinarySearchTreeTests
         var book2 = new Book("111", "AuthorA", "TitleA", "PubA", 2019, 150, 15.0, null);
         var book3 = new Book("333", "AuthorC", "TitleC", "PubC", 2021, 300, 30.0, null);
 
-        bst.Insert(book1);
-        bst.Insert(book2);
-        bst.Insert(book3);
+        bst.Add(book1);
+        bst.Add(book2);
+        bst.Add(book3);
 
         // Act
         var result = bst.InOrder().ToList();
@@ -214,9 +346,9 @@ public class BinarySearchTreeTests
         var book2 = new Book("222", "AuthorA", "Title2", "Pub2", 2019, 150, 15.0, null);
         var book3 = new Book("333", "AuthorB", "Title3", "Pub3", 2018, 300, 30.0, null);
 
-        bst.Insert(book1);
-        bst.Insert(book2);
-        bst.Insert(book3);
+        bst.Add(book1);
+        bst.Add(book2);
+        bst.Add(book3);
 
         // Act
         var result = bst.InOrder().ToList();
@@ -237,9 +369,9 @@ public class BinarySearchTreeTests
         var book2 = new Book("222", "AuthorB", "Title2", "Pub2", 2019, 150, 25.0, null);
         var book3 = new Book("333", "AuthorC", "Title3", "Pub3", 2021, 300, 15.0, null);
 
-        bst.Insert(book1);
-        bst.Insert(book2);
-        bst.Insert(book3);
+        bst.Add(book1);
+        bst.Add(book2);
+        bst.Add(book3);
 
         // Act
         var result = bst.InOrder().ToList();
