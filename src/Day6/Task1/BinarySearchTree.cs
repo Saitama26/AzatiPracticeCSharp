@@ -17,7 +17,11 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, IEnumerable
         _comparer = comparer ?? Comparer<T>.Default;
     }
 
-    public void Add(T item) => _root = InsertRec(_root, item);
+    public void Add(T item) 
+    {
+        _root = InsertRec(_root, item);
+        _count++;
+    }
 
     public void Clear()
     {
