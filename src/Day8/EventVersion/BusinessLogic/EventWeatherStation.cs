@@ -4,7 +4,7 @@ using Day8.Helpers.Services;
 
 namespace Day8.EventVersion.BusinessLogic;
 
-public class EventWeatherStation
+public class EventWeatherStation : IDisposable
 {
     private EventWeatherData _weatherData;
     private StatisticReportService _statisticService;
@@ -22,29 +22,36 @@ public class EventWeatherStation
         _weatherData.PressureChanged += OnPressureChanged;
     }
 
+    public StatisticReport GetStatisticReport(DateTime from, DateTime to)
+    {
+        return _statisticService.GetStatisticReport(from, to);
+    }
+
+    public void Dispose()
+    {
+        _weatherData.TemperatureChanged -= OnTemperatureChanged;
+        _weatherData.HumidityChanged -= OnHumidityChanged;
+        _weatherData.PressureChanged -= OnPressureChanged;
+    }
+
     private void OnPressureChanged(object? sender, WeatherInfoEventArgs e)
     {
         WeatherReport.Pressure = e.Pressure;
-        WeatherReport.LastModifiedWeatherTime = DateTime.Now;
+        WeatherReport.LastModifiedWeatherTime = DateTime.UtcNow;
         _statisticService.AddPressure(e.Pressure);
     }
 
     private void OnHumidityChanged(object? sender, WeatherInfoEventArgs e)
     {
         WeatherReport.Humidity = e.Humidity;
-        WeatherReport.LastModifiedWeatherTime = DateTime.Now;
+        WeatherReport.LastModifiedWeatherTime = DateTime.UtcNow;
         _statisticService.AddHumidity(e.Humidity);
     }
 
     private void OnTemperatureChanged(object? sender, WeatherInfoEventArgs e)
     {
         WeatherReport.Temperature = e.Temperature;
-        WeatherReport.LastModifiedWeatherTime = DateTime.Now;
+        WeatherReport.LastModifiedWeatherTime = DateTime.UtcNow;
         _statisticService.AddTemperature(e.Temperature);
-    }
-
-    public StatisticReport GetStatisticReport(DateTime from, DateTime to)
-    {
-        return _statisticService.GetStatisticReport(from, to);
     }
 }

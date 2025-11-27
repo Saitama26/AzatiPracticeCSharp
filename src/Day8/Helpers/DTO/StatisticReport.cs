@@ -1,4 +1,6 @@
-﻿namespace Day8.Helpers.DTO;
+﻿using System.Globalization;
+
+namespace Day8.Helpers.DTO;
 
 public class StatisticReport
 {
@@ -10,6 +12,10 @@ public class StatisticReport
 
     public override string ToString()
     {
-        return $"Statistic ({From} - {To}): Average T={AverageTemperature}, H={AverageHumidity}, P={AveragePressure}";
+        var c = CultureInfo.InvariantCulture;
+        return $"Statistic ({From:O} .. {To:O}): " +
+               $"Avg T={AverageTemperature.ToString("F2", c)}°C, " +
+               $"Avg H={AverageHumidity.ToString("F2", c)}%, " +
+               $"Avg P={AveragePressure.ToString("F2", c)} hPa";
     }
 }

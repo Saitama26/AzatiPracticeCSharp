@@ -39,9 +39,21 @@ public class Program
 
         Console.WriteLine(station.WeatherReport.ToString());
 
-        weatherData.Temperature = 22;
+        weatherData.Temperature = 26;
         weatherData.Humidity = 70;
         weatherData.Pressure = 1010;
+
+        Console.WriteLine(station.WeatherReport.ToString());
+
+        weatherData.Temperature = 29;
+        weatherData.Humidity = 72;
+        weatherData.Pressure = 964;
+
+        Console.WriteLine(station.WeatherReport.ToString());
+
+        weatherData.Temperature = 31;
+        weatherData.Humidity = 76;
+        weatherData.Pressure = 1199;
 
         Console.WriteLine(station.WeatherReport.ToString());
 

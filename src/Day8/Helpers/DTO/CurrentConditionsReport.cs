@@ -1,4 +1,6 @@
-﻿namespace Day8.Helpers.DTO;
+﻿using System.Globalization;
+
+namespace Day8.Helpers.DTO;
 
 public class CurrentConditionsReport
 {
@@ -9,6 +11,10 @@ public class CurrentConditionsReport
 
     public override string ToString()
     {
-        return $"Current conditions: T={Temperature} H={Humidity} P={Pressure}, updated {LastModifiedWeatherTime}";
+        var c = CultureInfo.InvariantCulture;
+        return $"Current Condition ({LastModifiedWeatherTime:o}): " +
+               $"T={Temperature.ToString("F2", c)}°C, " +
+               $"H={Humidity.ToString("F2", c)}%, " +
+               $"P={Pressure.ToString("F2", c)} hPa";
     }
 }

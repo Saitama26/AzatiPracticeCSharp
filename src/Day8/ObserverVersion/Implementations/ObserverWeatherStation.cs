@@ -27,6 +27,7 @@ public class ObserverWeatherStation : IObserver
         WeatherReport.Pressure = info.Pressure;
         WeatherReport.LastModifiedWeatherTime = info.Timestamp;
 
+
         _statisticService.AddTemperature(info.Temperature);
         _statisticService.AddHumidity(info.Humidity);
         _statisticService.AddPressure(info.Pressure);

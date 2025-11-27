@@ -14,14 +14,10 @@ public class EventWeatherData
         get => _temperature;
         set
         {
-            if (value < -100 || value > 100)
-            {
-                throw new ArgumentOutOfRangeException(nameof(Temperature));
-            }
-
+            ValidateTemperature(value);
             _temperature = value;
 
-            TemperatureChanged?.Invoke(this, new WeatherInfoEventArgs(_temperature, _humidity, _pressure));
+            TemperatureChanged?.Invoke(this, new WeatherInfoEventArgs(DateTime.UtcNow, _temperature, _humidity, _pressure));
         }
     }
 
@@ -30,14 +26,10 @@ public class EventWeatherData
         get => _humidity;
         set
         {
-            if (value < 0 || value > 100)
-            {
-                throw new ArgumentOutOfRangeException(nameof(Humidity));
-            }
-
+            ValidateHumidity(value);
             _humidity = value;
 
-            HumidityChanged?.Invoke(this, new WeatherInfoEventArgs(_temperature, _humidity, _pressure));
+            HumidityChanged?.Invoke(this, new WeatherInfoEventArgs(DateTime.UtcNow, _temperature, _humidity, _pressure));
         }
     }
 
@@ -46,14 +38,30 @@ public class EventWeatherData
         get => _pressure;
         set
         {
-            if (value < 800 || value > 1200)
-            {
-                throw new ArgumentOutOfRangeException(nameof(Pressure));
-            }
-
+            ValidatePressure(value);
             _pressure = value;
 
-            PressureChanged?.Invoke(this, new WeatherInfoEventArgs(_temperature, _humidity, _pressure));
+            PressureChanged?.Invoke(this, new WeatherInfoEventArgs(DateTime.UtcNow, _temperature, _humidity, _pressure));
         }
+    }
+
+    private static void ValidateTemperature(float value)
+    {
+        if (value < -273.15f)
+            throw new ArgumentOutOfRangeException(nameof(Temperature), "Temperature cannot be below -273.15°C (absolute zero).");
+        if (value > 1000f)
+            throw new ArgumentOutOfRangeException(nameof(Temperature), "Temperature exceeds the reasonable upper limit.");
+    }
+
+    private static void ValidateHumidity(float value)
+    {
+        if (value < 0f || value > 100f)
+            throw new ArgumentOutOfRangeException(nameof(Humidity), "Humidity must be in the range [0%, 100%].");
+    }
+
+    private static void ValidatePressure(float value)
+    {
+        if (value < 300f || value > 1200f)
+            throw new ArgumentOutOfRangeException(nameof(Pressure), "Pressure must be in the range [300, 1100] hPa.");
     }
 }
