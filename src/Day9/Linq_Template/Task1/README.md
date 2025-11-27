@@ -15,5 +15,5 @@
 
 **Реализация -  
 ссылки на решение:**
-- [Linq](LinqTask.cs)  
+- [Algorithms](LinqTask.cs)  
 - [Модульные тесты](../../tests/Day9.Tests/Task1/)

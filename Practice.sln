@@ -53,7 +53,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day9", "src\Day9\Linq_Templ
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day9.Tests", "Day9.Tests", "{A3A1B6CA-3F9D-4142-8702-BC573933C351}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day9.Tests", "Day9.Tests\Day9.Tests.csproj", "{72A0AA4C-250C-4628-A296-52682728A1A6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day9.Tests", "tests\Day9.Tests\Day9.Tests.csproj", "{72A0AA4C-250C-4628-A296-52682728A1A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
