@@ -6,8 +6,8 @@ namespace Day8.EventVersion.BusinessLogic;
 
 public class EventWeatherStation : IDisposable
 {
-    private EventWeatherData _weatherData;
-    private StatisticReportService _statisticService;
+    private readonly EventWeatherData _weatherData;
+    private readonly StatisticReportService _statisticService;
 
     public CurrentConditionsReport WeatherReport { get; private set; }
 

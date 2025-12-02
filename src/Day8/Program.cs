@@ -6,58 +6,144 @@ namespace Day8;
 
 public class Program
 {
-    static void Main()
+    private static readonly Random _random = new();
+
+    static async Task Main()
     {
-        // Event version
+        Console.WriteLine("=== Testing Thread Safety ===\n");
+
+        await TestEventVersionThreadSafety();
+        Console.WriteLine();
+        await TestObserverVersionThreadSafety();
+        
+        Console.WriteLine("\n=== All tests completed successfully! ===");
+    }
+
+    static async Task TestEventVersionThreadSafety()
+    {
+        Console.WriteLine("--- Event Version Thread Safety Test ---");
+
         var eventWeatherData = new EventWeatherData();
-        var eventStation = new EventWeatherStation(eventWeatherData);
+        using var eventStation = new EventWeatherStation(eventWeatherData);
 
-        // simulating data entry
-        eventWeatherData.Temperature = 10;
-        eventWeatherData.Humidity = 35;
-        eventWeatherData.Pressure = 1100;
+        var tasks = new List<Task>();
+        var iterationsPerTask = 100;
+        var taskCount = 10;
 
-        Console.WriteLine(eventStation.WeatherReport.ToString());
+        for (int t = 0; t < taskCount; t++)
+        {
+            int taskId = t;
+            tasks.Add(Task.Run(() =>
+            {
+                for (int i = 0; i < iterationsPerTask; i++)
+                {
+                    try
+                    {
+                        eventWeatherData.Temperature = _random.Next(-50, 100);
+                        eventWeatherData.Humidity = _random.Next(0, 100);
+                        eventWeatherData.Pressure = _random.Next(300, 1200);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"[Event] Task {taskId} Error: {ex.Message}");
+                    }
+                }
+            }));
+        }
 
-        eventWeatherData.Temperature = 35;
-        eventWeatherData.Humidity = 70;
-        eventWeatherData.Pressure = 1199;
+        for (int t = 0; t < 5; t++)
+        {
+            tasks.Add(Task.Run(() =>
+            {
+                for (int i = 0; i < iterationsPerTask; i++)
+                {
+                    var report = eventStation.GetStatisticReport(
+                        DateTime.UtcNow.AddMinutes(-10), 
+                        DateTime.UtcNow);
+                }
+            }));
+        }
 
-        Console.WriteLine(eventStation.WeatherReport.ToString());
+        await Task.WhenAll(tasks);
 
-        var eventReport = eventStation.GetStatisticReport(DateTime.Now.AddMinutes(-10), DateTime.Now);
-        Console.WriteLine(eventReport.ToString());
+        Console.WriteLine($"[Event] Completed {taskCount * iterationsPerTask} writes from {taskCount} threads");
+        Console.WriteLine($"[Event] Final report: {eventStation.WeatherReport}");
+        Console.WriteLine($"[Event] Statistics: {eventStation.GetStatisticReport(DateTime.UtcNow.AddMinutes(-10), DateTime.UtcNow)}");
+    }
 
-        // Obverver pattern
+    static async Task TestObserverVersionThreadSafety()
+    {
+        Console.WriteLine("--- Observer Version Thread Safety Test ---");
+
         var weatherData = new ObserverWeatherData();
-        var station = new ObserverWeatherStation(weatherData);
+        var stations = new List<ObserverWeatherStation>();
 
-        // simulating data entry
-        weatherData.Temperature = 20;
-        weatherData.Humidity = 65;
-        weatherData.Pressure = 1012;
+        // Создаём несколько станций-наблюдателей
+        for (int i = 0; i < 5; i++)
+        {
+            stations.Add(new ObserverWeatherStation(weatherData));
+        }
 
-        Console.WriteLine(station.WeatherReport.ToString());
+        var tasks = new List<Task>();
+        var iterationsPerTask = 100;
+        var taskCount = 10;
 
-        weatherData.Temperature = 26;
-        weatherData.Humidity = 70;
-        weatherData.Pressure = 1010;
+        // Запускаем несколько потоков для записи данных
+        for (int t = 0; t < taskCount; t++)
+        {
+            int taskId = t;
+            tasks.Add(Task.Run(() =>
+            {
+                for (int i = 0; i < iterationsPerTask; i++)
+                {
+                    try
+                    {
+                        weatherData.Temperature = _random.Next(-100, 100);
+                        weatherData.Humidity = _random.Next(0, 100);
+                        weatherData.Pressure = _random.Next(800, 1200);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"[Observer] Task {taskId} Error: {ex.Message}");
+                    }
+                }
+            }));
+        }
 
-        Console.WriteLine(station.WeatherReport.ToString());
+        foreach (var station in stations)
+        {
+            tasks.Add(Task.Run(() =>
+            {
+                for (int i = 0; i < iterationsPerTask; i++)
+                {
+                    var report = station.GetStatisticReport(
+                        DateTime.UtcNow.AddMinutes(-10), 
+                        DateTime.UtcNow);
+                }
+            }));
+        }
 
-        weatherData.Temperature = 29;
-        weatherData.Humidity = 72;
-        weatherData.Pressure = 964;
+        tasks.Add(Task.Run(() =>
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                var tempStation = new ObserverWeatherStation(weatherData);
+                Thread.Sleep(10);
+                tempStation.Dispose(); 
+            }
+        }));
 
-        Console.WriteLine(station.WeatherReport.ToString());
+        await Task.WhenAll(tasks);
 
-        weatherData.Temperature = 31;
-        weatherData.Humidity = 76;
-        weatherData.Pressure = 1199;
+        Console.WriteLine($"[Observer] Completed {taskCount * iterationsPerTask} writes from {taskCount} threads");
+        Console.WriteLine($"[Observer] {stations.Count} stations received updates concurrently");
 
-        Console.WriteLine(station.WeatherReport.ToString());
+        foreach (var station in stations)
+        {
+            Console.WriteLine($"[Observer] Station report: {station.WeatherReport}");
+            station.Dispose();
+        }
 
-        var report = station.GetStatisticReport(DateTime.Now.AddMinutes(-10), DateTime.Now);
-        Console.WriteLine(report.ToString());
+        Console.WriteLine($"[Observer] Statistics: {stations[0].GetStatisticReport(DateTime.UtcNow.AddMinutes(-10), DateTime.UtcNow)}");
     }
 }

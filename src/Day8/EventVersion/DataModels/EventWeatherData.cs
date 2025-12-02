@@ -2,6 +2,7 @@
 
 public class EventWeatherData
 {
+    private readonly object _lock = new();
     private float _temperature;
     private float _humidity;
     private float _pressure;
@@ -9,39 +10,52 @@ public class EventWeatherData
     public event EventHandler<WeatherInfoEventArgs>? TemperatureChanged;
     public event EventHandler<WeatherInfoEventArgs>? HumidityChanged;
     public event EventHandler<WeatherInfoEventArgs>? PressureChanged;
+    
     public float Temperature
     {
-        get => _temperature;
+        get { lock (_lock) { return _temperature; } }
         set
         {
             ValidateTemperature(value);
-            _temperature = value;
-
-            TemperatureChanged?.Invoke(this, new WeatherInfoEventArgs(DateTime.UtcNow, _temperature, _humidity, _pressure));
+            WeatherInfoEventArgs args;
+            lock (_lock)
+            {
+                _temperature = value;
+                args = new WeatherInfoEventArgs(DateTime.UtcNow, _temperature, _humidity, _pressure);
+            }
+            TemperatureChanged?.Invoke(this, args);
         }
     }
 
     public float Humidity
     {
-        get => _humidity;
+        get { lock (_lock) { return _humidity; } }
         set
         {
             ValidateHumidity(value);
-            _humidity = value;
-
-            HumidityChanged?.Invoke(this, new WeatherInfoEventArgs(DateTime.UtcNow, _temperature, _humidity, _pressure));
+            WeatherInfoEventArgs args;
+            lock (_lock)
+            {
+                _humidity = value;
+                args = new WeatherInfoEventArgs(DateTime.UtcNow, _temperature, _humidity, _pressure);
+            }
+            HumidityChanged?.Invoke(this, args);
         }
     }
 
     public float Pressure
     {
-        get => _pressure;
+        get { lock (_lock) { return _pressure; } }
         set
         {
             ValidatePressure(value);
-            _pressure = value;
-
-            PressureChanged?.Invoke(this, new WeatherInfoEventArgs(DateTime.UtcNow, _temperature, _humidity, _pressure));
+            WeatherInfoEventArgs args;
+            lock (_lock)
+            {
+                _pressure = value;
+                args = new WeatherInfoEventArgs(DateTime.UtcNow, _temperature, _humidity, _pressure);
+            }
+            PressureChanged?.Invoke(this, args);
         }
     }
 
